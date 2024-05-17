@@ -49,12 +49,12 @@
   "devDependencies": {
     "contentlayer": "^0.3.4",
     "eslint-config-custom": "workspace:*",
-    "fumadocs-core": "workspace:*",
+    "@maximai/fumadocs-core": "workspace:*",
     "tsconfig": "workspace:*",
     "unified": "^11.0.4"
   },
   "peerDependencies": {
-    "fumadocs-core": "12.x.x"
+    "@maximai/fumadocs-core": "12.x.x"
   },
   "publishConfig": {
     "access": "public"

@@ -1,4 +1,7 @@
-import { type TableOfContents } from 'fumadocs-core/server';
+import {
+  type TableOfContents,
+  type TOCItemType,
+} from '@maximai/fumadocs-core/server';
 import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
 import { replaceOrDefault } from './utils/shared';
 import { cn } from './utils/cn';

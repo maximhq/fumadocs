@@ -1,4 +1,4 @@
-import { type BaseLayoutProps } from 'fumadocs-ui/layout';
+import { type BaseLayoutProps } from '@maximai/fumadocs-ui/layout';
 
 // basic configuration here
 export const baseOptions: BaseLayoutProps = {

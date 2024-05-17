@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
-import { DocsPage, DocsBody } from 'fumadocs-ui/page';
+import { DocsPage, DocsBody } from '@maximai/fumadocs-ui/page';
 import { notFound } from 'next/navigation';
 import { pages } from '@/app/source';
 import { compile } from '@fumadocs/mdx-remote';
-import defaultComponents from 'fumadocs-ui/mdx';
+import defaultComponents from '@maximai/fumadocs-ui/mdx';
 
 export default async function Page({
   params,

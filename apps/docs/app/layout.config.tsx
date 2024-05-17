@@ -1,8 +1,8 @@
-import { type BaseLayoutProps } from 'fumadocs-ui/layout';
-import { BookIcon, LayoutTemplateIcon } from 'lucide-react';
-import Image from 'next/image';
 import { FumadocsIcon, NavChildren } from '@/app/layout.client';
 import Logo from '@/public/logo.png';
+import { type BaseLayoutProps } from '@maximai/fumadocs-ui/layout';
+import { BookIcon, LayoutTemplateIcon } from 'lucide-react';
+import Image from 'next/image';
 
 export const baseOptions: BaseLayoutProps = {
   githubUrl: 'https://github.com/fuma-nama/fumadocs',

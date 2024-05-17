@@ -9,7 +9,7 @@ Footer, and Breadcrumb.
 ## Usage
 
 ```mdx
-import { DocsPage, DocsBody } from 'fumadocs-ui/page';
+import { DocsPage, DocsBody } from '@maximai/fumadocs-ui/page';
 
 <DocsPage>
   <DocsBody>...</DocsBody>
@@ -23,7 +23,7 @@ It applies the [Typography](/docs/ui/theme#typography) styles, wrap your content
 > You can use this component without `<DocsPage />`.
 
 ```mdx
-import { DocsBody } from 'fumadocs-ui/page';
+import { DocsBody } from '@maximai/fumadocs-ui/page';
 
 <DocsBody>
   <h1>This heading looks good!</h1>
@@ -39,7 +39,7 @@ documents, You can parse TOC by using the
 You can easily customise or disable TOC in your documentation.
 
 ```mdx
-import { DocsPage } from 'fumadocs-ui/page';
+import { DocsPage } from '@maximai/fumadocs-ui/page';
 
 <DocsPage toc={headings} tableOfContent={options}>
   ...
@@ -65,7 +65,7 @@ For Github hosted documents, you can use
 the [Git Last Modified](/docs/headless/utils/git-last-edit) utility.
 
 ```jsx
-import { DocsPage } from 'fumadocs-ui/page';
+import { DocsPage } from '@maximai/fumadocs-ui/page';
 
 <DocsPage lastUpdate={new Date(lastModifiedTime)} />;
 ```
@@ -99,7 +99,7 @@ A navigation element, shown only when user is navigating in folders.
 In conjunction of Fumadocs MDX, you may create a `page.mdx` file and add the following.
 
 ```mdx
-export { withArticle as default } from 'fumadocs-ui/page';
+export { withArticle as default } from '@maximai/fumadocs-ui/page';
 
 ## Hello World
 ```

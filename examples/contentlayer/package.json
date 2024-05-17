@@ -1,0 +1,33 @@
+{
+  "name": "example-contentlayer",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@maximai/fumadocs-core": "workspace:*",
+    "@maximai/fumadocs-ui": "workspace:*",
+    "contentlayer": "0.3.4",
+    "fumadocs-contentlayer": "1.1.20",
+    "next": "^14.2.3",
+    "next-contentlayer": "^0.3.4",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.0",
+    "autoprefixer": "10.4.19",
+    "postcss": "8.4.38",
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.4.5"
+  },
+  "overrides": {
+    "unified": "^11.0.4",
+    "mdx-bundler": "^10.0.1"
+  }
+}

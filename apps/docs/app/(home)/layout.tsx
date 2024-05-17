@@ -1,4 +1,4 @@
-import { Layout } from 'fumadocs-ui/layout';
+import { Layout } from '@maximai/fumadocs-ui/layout';
 import type { ReactNode } from 'react';
 import { baseOptions } from '@/app/layout.config';
 

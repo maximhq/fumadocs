@@ -1,5 +1,5 @@
 'use client';
-import Link from 'fumadocs-core/link';
+import Link from '@maximai/fumadocs-core/link';
 import { type ReactNode, useEffect, useState } from 'react';
 import { MoreVertical } from 'lucide-react';
 import { cn } from '@/utils/cn';

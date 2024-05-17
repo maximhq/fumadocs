@@ -1,5 +1,5 @@
-import Link from 'fumadocs-core/link';
 import { ChevronDown } from 'lucide-react';
+import Link from '@maximai/fumadocs-core/link';
 import { usePathname } from 'next/navigation';
 import { cva } from 'class-variance-authority';
 import type { LinkItemType } from '@/layout';

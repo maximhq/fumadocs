@@ -1,5 +1,5 @@
 import { ChevronRight } from 'lucide-react';
-import { BreadcrumbOptions, useBreadcrumb } from 'fumadocs-core/breadcrumb';
+import { BreadcrumbOptions, useBreadcrumb } from '@maximai/fumadocs-core/breadcrumb';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Fragment } from 'react';

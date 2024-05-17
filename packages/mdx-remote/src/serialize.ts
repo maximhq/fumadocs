@@ -1,7 +1,7 @@
 import { compile, type CompileOptions } from '@mdx-js/mdx';
 import type { VFile } from 'vfile';
 import type React from 'react';
-import type { TableOfContents } from 'fumadocs-core/server';
+import type { TableOfContents } from '@maximai/fumadocs-core/server';
 import matter from 'gray-matter';
 import { type MDXComponents } from 'mdx/types';
 import { renderMDX } from '@/render';

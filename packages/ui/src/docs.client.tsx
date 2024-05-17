@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { SidebarTrigger } from 'fumadocs-core/sidebar';
+import { SidebarTrigger } from '@maximai/fumadocs-core/sidebar';
 import { Menu, X } from 'lucide-react';
 import type { NavProps } from '@/components/layout/nav';
 import { useSidebar } from '@/contexts/sidebar';

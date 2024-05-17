@@ -1,4 +1,4 @@
-import type { PageTree } from 'fumadocs-core/server';
+import type { PageTree } from '@maximai/fumadocs-core/server';
 import type { ReactNode, HTMLAttributes } from 'react';
 import Link from 'next/link';
 import { MoreHorizontal } from 'lucide-react';
@@ -26,37 +26,37 @@ type ActiveType = 'none' | 'url' | 'nested-url';
 
 export type LinkItemType =
   | {
-      type?: 'main';
-      url: string;
-      /**
-       * When the item is marked as active
-       *
-       * @defaultValue 'url'
-       */
-      active?: ActiveType;
-      icon?: ReactNode;
-      text: string;
-      external?: boolean;
-    }
+    type?: 'main';
+    url: string;
+    /**
+     * When the item is marked as active
+     *
+     * @defaultValue 'url'
+     */
+    active?: ActiveType;
+    icon?: ReactNode;
+    text: string;
+    external?: boolean;
+  }
   | {
-      type: 'menu';
-      icon?: ReactNode;
-      text: string;
-      items: LinkItemType[];
-    }
+    type: 'menu';
+    icon?: ReactNode;
+    text: string;
+    items: LinkItemType[];
+  }
   | {
-      type: 'secondary';
-      url: string;
-      /**
-       * When the item is marked as active
-       *
-       * @defaultValue 'url'
-       */
-      active?: ActiveType;
-      icon: ReactNode;
-      text: string;
-      external?: boolean;
-    };
+    type: 'secondary';
+    url: string;
+    /**
+     * When the item is marked as active
+     *
+     * @defaultValue 'url'
+     */
+    active?: ActiveType;
+    icon: ReactNode;
+    text: string;
+    external?: boolean;
+  };
 
 interface NavOptions extends Omit<NavProps, 'items'> {
   enabled: boolean;
@@ -140,49 +140,50 @@ export function DocsLayout({
 
   return (
     <TreeContextProvider tree={tree}>
-      {replaceOrDefault(nav, <SubNav {...nav} />)}
+      {/* {replaceOrDefault(nav, <SubNav {...nav} />)} */}
       <div
         {...containerProps}
-        className={cn('flex flex-1 flex-row', containerProps?.className)}
+        className={cn('mx-auto w-full flex flex-1 flex-row gap-6 xl:gap-12', containerProps?.className)}
       >
         {replaceOrDefault(
           { enabled: sidebarEnabled, component: sidebarReplace },
           <Aside
             {...sidebar}
+            enableSearch={sidebarEnabled}
             items={finalLinks}
-            banner={
-              <>
-                <div className="flex flex-row items-center justify-between border-b pb-2 max-md:hidden">
-                  <Link
-                    href={nav?.url ?? '/'}
-                    className="inline-flex items-center gap-2.5 font-medium"
-                  >
-                    {nav?.title}
-                  </Link>
-                  {finalLinks.length > 0 && (
-                    <LinksMenu items={finalLinks}>
-                      <MoreHorizontal />
-                    </LinksMenu>
-                  )}
-                </div>
+          // banner={
+          //   <>
+          //     <div className="flex flex-row items-center justify-between pb-2 border-b max-md:hidden">
+          //       <Link
+          //         href={nav?.url ?? '/'}
+          //         className="inline-flex items-center gap-2.5 font-medium"
+          //       >
+          //         {nav?.title}
+          //       </Link>
+          //       {finalLinks.length > 0 && (
+          //         <LinksMenu items={finalLinks}>
+          //           <MoreHorizontal />
+          //         </LinksMenu>
+          //       )}
+          //     </div>
 
-                {sidebar.banner}
-              </>
-            }
-            bannerProps={{
-              className: cn(
-                !sidebar.banner && 'max-md:hidden',
-                sidebar.bannerProps?.className,
-              ),
-              ...sidebar.bannerProps,
-            }}
-            footer={
-              <>
-                <ThemeToggle className="me-auto" />
-                {sidebar.footer}
-                {i18n ? <LanguageToggle /> : null}
-              </>
-            }
+          //     {sidebar.banner}
+          //   </>
+          // }
+          // bannerProps={{
+          //   className: cn(
+          //     !sidebar.banner && 'max-md:hidden',
+          //     sidebar.bannerProps?.className,
+          //   ),
+          //   ...sidebar.bannerProps,
+          // }}
+          // footer={
+          //   <>
+          //     <ThemeToggle className="me-auto" />
+          //     {sidebar.footer}
+          //     {i18n ? <LanguageToggle /> : null}
+          //   </>
+          // }
           />,
         )}
 

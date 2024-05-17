@@ -1,5 +1,5 @@
 import { pageTree } from '../source';
-import { DocsLayout } from 'fumadocs-ui/layout';
+import { DocsLayout } from '@maximai/fumadocs-ui/layout';
 import type { ReactNode } from 'react';
 import { baseOptions } from '../layout.config';
 

@@ -3,7 +3,7 @@ title: Layout
 description: The layout of documentation
 ---
 
-import { File, Files, Folder } from 'fumadocs-ui/components/files';
+import { File, Files, Folder } from '@maximai/fumadocs-ui/components/files';
 
 The layout of documentation pages, it includes sidebar and navbar.
 
@@ -14,7 +14,7 @@ The layout of documentation pages, it includes sidebar and navbar.
 Pass your page tree to the component.
 
 ```jsx
-import { DocsLayout } from 'fumadocs-ui/layout';
+import { DocsLayout } from '@maximai/fumadocs-ui/layout';
 
 export default function Layout({ children }) {
   return <DocsLayout tree={tree}>{children}</DocsLayout>;
@@ -28,7 +28,7 @@ To share the navbar and search dialog across other pages, use the `Layout` compo
 It doesn't contain a sidebar, therefore, a page tree is not required.
 
 ```jsx
-import { Layout } from 'fumadocs-ui/layout';
+import { Layout } from '@maximai/fumadocs-ui/layout';
 
 export default function HomeLayout({ children }) {
   return <Layout>{children}</Layout>;
@@ -103,7 +103,7 @@ Navigation links displayed on every page.
 A link to navigate to an URL, can be external.
 
 ```mdx
-import { DocsLayout } from 'fumadocs-ui/layout';
+import { DocsLayout } from '@maximai/fumadocs-ui/layout';
 
 <DocsLayout
   links={[
@@ -119,7 +119,7 @@ import { DocsLayout } from 'fumadocs-ui/layout';
 To mark the item as active when browsing child pages like `/blog/post`, add set it as `nested-url`.
 
 ```mdx
-import { DocsLayout } from 'fumadocs-ui/layout';
+import { DocsLayout } from '@maximai/fumadocs-ui/layout';
 
 <DocsLayout
   links={[
@@ -138,7 +138,7 @@ import { DocsLayout } from 'fumadocs-ui/layout';
 Same as normal items, but are shown as icon buttons on the navbar.
 
 ```mdx
-import { DocsLayout } from 'fumadocs-ui/layout';
+import { DocsLayout } from '@maximai/fumadocs-ui/layout';
 
 <DocsLayout
   links={[
@@ -157,7 +157,7 @@ import { DocsLayout } from 'fumadocs-ui/layout';
 A dropdown menu containing multiple link items.
 
 ```mdx
-import { DocsLayout } from 'fumadocs-ui/layout';
+import { DocsLayout } from '@maximai/fumadocs-ui/layout';
 
 <DocsLayout
   links={[

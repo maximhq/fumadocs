@@ -8,7 +8,7 @@ import {
   useEffect,
 } from 'react';
 import { usePathname } from 'next/navigation';
-import { SidebarProvider as BaseProvider } from 'fumadocs-core/sidebar';
+import { SidebarProvider as BaseProvider } from '@maximai/fumadocs-core/sidebar';
 
 interface SidebarContext {
   open: boolean;

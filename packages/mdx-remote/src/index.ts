@@ -4,7 +4,7 @@ import {
   remarkGfm,
   remarkHeading,
   type RemarkHeadingOptions,
-} from 'fumadocs-core/mdx-plugins';
+} from '@maximai/fumadocs-core/mdx-plugins';
 import type { CompileOptions } from '@mdx-js/mdx';
 import rehypeImgSize, {
   type Options as RehypeImgSizeOptions,

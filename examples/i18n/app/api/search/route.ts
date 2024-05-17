@@ -1,5 +1,5 @@
 import { getPages } from '@/app/source';
-import { createI18nSearchAPI } from 'fumadocs-core/search/server';
+import { createI18nSearchAPI } from '@maximai/fumadocs-core/search/server';
 
 import { languages } from '@/i18n';
 

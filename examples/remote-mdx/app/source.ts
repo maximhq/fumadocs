@@ -1,4 +1,4 @@
-import type { PageTree } from 'fumadocs-core/server';
+import type { PageTree } from '@maximai/fumadocs-core/server';
 
 export const pageTree: PageTree.Root = {
   name: 'Docs',

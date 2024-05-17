@@ -1,7 +1,5 @@
 import { cva } from 'class-variance-authority';
 import { ChevronDown, ExternalLinkIcon } from 'lucide-react';
-import type { PageTree } from 'fumadocs-core/server';
-import * as Base from 'fumadocs-core/sidebar';
 import { usePathname } from 'next/navigation';
 import {
   createContext,
@@ -12,7 +10,10 @@ import {
   useMemo,
   useState,
 } from 'react';
-import Link from 'fumadocs-core/link';
+import type { PageTree } from '@maximai/fumadocs-core/server';
+import * as Base from '@maximai/fumadocs-core/sidebar';
+import * as React from 'react';
+import Link from '@maximai/fumadocs-core/link';
 import { cn } from '@/utils/cn';
 import { useTreeContext } from '@/contexts/tree';
 import { ScrollArea, ScrollViewport } from '@/components/ui/scroll-area';
@@ -26,6 +27,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from '../ui/collapsible';
+import { useSearchContext } from '@/provider';
 
 export interface SidebarProps {
   items: LinkItemType[];
@@ -37,6 +39,12 @@ export interface SidebarProps {
    * @defaultValue 1
    */
   defaultOpenLevel?: number;
+  /**
+   * Show/hide search toggle
+   *
+   * Note: Enable/disable search from root provider instead
+   */
+  enableSearch?: boolean;
 
   components?: Partial<Components>;
   banner?: React.ReactNode;
@@ -52,19 +60,19 @@ interface InternalContext {
 }
 
 interface Components {
-  Item: React.FC<{ item: PageTree.Item }>;
+  Item: React.FC<{ item: PageTree.Item; isNestedInCollapsible?: boolean }>;
   Folder: React.FC<{ item: PageTree.Folder; level: number }>;
   Separator: React.FC<{ item: PageTree.Separator }>;
 }
 
 const itemVariants = cva(
-  'flex w-full flex-row items-center gap-2 rounded-md px-2 py-1.5 text-muted-foreground transition-colors duration-100 [&_svg]:size-4',
+  'flex flex-row items-center gap-2 rounded-md mx-2 px-2 py-1.5 text-muted-foreground transition-colors duration-100 [&_svg]:size-4 my-1',
   {
     variants: {
       active: {
         true: 'bg-primary/10 font-medium text-primary',
         false:
-          'hover:bg-accent/50 hover:text-accent-foreground/80 hover:transition-none',
+          'hover:bg-zinc-200 hover:text-accent-foreground/80 hover:transition-none',
       },
     },
   },
@@ -82,14 +90,15 @@ const Context = createContext<InternalContext>({
 });
 
 export function Sidebar({
-  footer,
+  // footer,
   components,
   defaultOpenLevel = 1,
+  enableSearch = true,
   banner,
   items,
   aside,
   bannerProps,
-  footerProps,
+  // footerProps,
 }: SidebarProps & {
   aside?: HTMLAttributes<HTMLElement> & Record<string, unknown>;
 }): React.ReactElement {
@@ -100,6 +109,7 @@ export function Sidebar({
     }),
     [components, defaultOpenLevel],
   );
+  const search = useSearchContext();
 
   return (
     <Context.Provider value={context}>
@@ -108,20 +118,17 @@ export function Sidebar({
         blockScrollingWidth={768} // md
         {...aside}
         className={cn(
-          'z-30 flex w-full flex-col text-[15px] md:sticky md:top-0 md:h-dvh md:w-[240px] md:border-e md:bg-card md:text-sm xl:w-[260px]',
-          'max-md:fixed max-md:inset-0 max-md:bg-background/80 max-md:pt-16 max-md:backdrop-blur-md max-md:data-[open=false]:hidden',
+          'z-30 flex flex-col text-[15px] md:sticky md:top-0 md:h-[calc(100vh-40px)] md:w-[240px] md:border-e md:bg-card md:text-sm xl:w-[260px]',
+          'max-md:fixed max-md:inset-0 max-md:bg-background/80 max-md:pt-16 max-md:backdrop-blur-md max-md:data-[open=false]:hidden bg-zinc-100 border-r',
           aside?.className,
         )}
       >
         <div
-          {...bannerProps}
           className={cn(
-            'flex flex-col gap-2 px-4 pt-2 md:px-3 md:pt-4',
-            bannerProps?.className,
+            'flex flex-col gap-2 border-b',
           )}
         >
-          {banner}
-          <LargeSearchToggle className="rounded-lg max-md:hidden" />
+          {enableSearch && search.enabled ? <LargeSearchToggle className="rounded-none hover:bg-neutral-100 max-md:hidden bg-white p-3 border-0" /> : null}
         </div>
         <ViewportContent>
           {items.length > 0 && (
@@ -132,7 +139,7 @@ export function Sidebar({
             </div>
           )}
         </ViewportContent>
-        <div
+        {/* <div
           {...footerProps}
           className={cn(
             'flex flex-row items-center border-t px-4 py-1 md:px-3',
@@ -140,7 +147,7 @@ export function Sidebar({
           )}
         >
           {footer}
-        </div>
+        </div> */}
       </Base.SidebarList>
     </Context.Provider>
   );
@@ -156,12 +163,12 @@ function ViewportContent({
   return (
     <ScrollArea className="flex-1">
       <ScrollViewport
-        style={{
-          maskImage:
-            'linear-gradient(to bottom, transparent 2px, white 24px, white calc(100% - 24px), transparent calc(100% - 2px))',
-        }}
+      // style={{
+      //   maskImage:
+      //     'linear-gradient(to bottom, transparent 2px, white 24px, white calc(100% - 24px), transparent calc(100% - 2px))',
+      // }}
       >
-        <div className="flex flex-col gap-8 px-4 py-6 md:px-3">
+        <div className="flex flex-col gap-8 pb-10 max-md:px-4 mt-4">
           {children}
           <NodeList items={root.children} />
         </div>
@@ -173,11 +180,13 @@ function ViewportContent({
 interface NodeListProps extends React.HTMLAttributes<HTMLDivElement> {
   items: PageTree.Node[];
   level?: number;
+  isNestedInCollapsible?: boolean;
 }
 
 function NodeList({
   items,
   level = 0,
+  isNestedInCollapsible,
   ...props
 }: NodeListProps): React.ReactElement {
   const { components } = useContext(Context);
@@ -193,7 +202,13 @@ function NodeList({
           case 'folder':
             return <components.Folder key={id} item={item} level={level + 1} />;
           default:
-            return <components.Item key={item.url} item={item} />;
+            return (
+              <components.Item
+                key={item.url}
+                item={item}
+                isNestedInCollapsible={isNestedInCollapsible}
+              />
+            );
         }
       })}
     </div>
@@ -202,8 +217,12 @@ function NodeList({
 
 function PageNode({
   item: { icon, external = false, url, name },
+  nested = false,
+  isNestedInCollapsible = false,
 }: {
   item: PageTree.Item;
+  nested?: boolean;
+  isNestedInCollapsible?: boolean;
 }): React.ReactElement {
   const pathname = usePathname();
   const { closeOnRedirect } = useSidebar();
@@ -213,7 +232,7 @@ function PageNode({
     <Link
       href={url}
       external={external}
-      className={cn(itemVariants({ active }))}
+      className={cn(itemVariants({ active }), isNestedInCollapsible ? "ml-0" : '')}
       onClick={useCallback(() => {
         closeOnRedirect.current = !active;
       }, [closeOnRedirect, active])}
@@ -292,9 +311,10 @@ function FolderNode({
       )}
       <CollapsibleContent>
         <NodeList
-          className="ms-2 flex flex-col border-s py-2 ps-2"
+          className="flex flex-col py-2 ms-2 border-s ps-2"
           items={children}
           level={level}
+          isNestedInCollapsible
         />
       </CollapsibleContent>
     </Collapsible>
@@ -306,5 +326,5 @@ function SeparatorNode({
 }: {
   item: PageTree.Separator;
 }): React.ReactElement {
-  return <p className="mb-2 mt-8 px-2 font-medium first:mt-0">{item.name}</p>;
+  return <p className="px-2 mt-8 mb-2 font-medium first:mt-0">{item.name}</p>;
 }

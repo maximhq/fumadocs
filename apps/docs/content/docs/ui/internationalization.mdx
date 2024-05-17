@@ -13,8 +13,8 @@ import * as A from '@/content/docs/headless/internationalization.mdx';
 A `I18nProvider` is needed for localization. Wrap the root provider inside your i18n provider.
 
 ```tsx
-import { RootProvider } from 'fumadocs-ui/provider';
-import { I18nProvider } from 'fumadocs-ui/i18n';
+import { RootProvider } from '@maximai/fumadocs-ui/provider';
+import { I18nProvider } from '@maximai/fumadocs-ui/i18n';
 
 export default function RootLayout({
   children,
@@ -34,8 +34,8 @@ export default function RootLayout({
 We only provide english translation by default, you have to pass your translations to the provider.
 
 ```tsx
-import { RootProvider } from 'fumadocs-ui/provider';
-import { I18nProvider } from 'fumadocs-ui/i18n';
+import { RootProvider } from '@maximai/fumadocs-ui/provider';
+import { I18nProvider } from '@maximai/fumadocs-ui/i18n';
 
 export default function RootLayout({
   children,
@@ -62,7 +62,7 @@ export default function RootLayout({
 To allow users changing their language, enable `i18n` on docs layout.
 
 ```tsx title="[lang]/docs/layout.tsx"
-import { DocsLayout } from 'fumadocs-ui/layout';
+import { DocsLayout } from '@maximai/fumadocs-ui/layout';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return <DocsLayout i18n>{children}</DocsLayout>;

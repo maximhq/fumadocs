@@ -17,7 +17,7 @@ You can customize the search dialog from [Root Provider](/docs/ui/blocks/root-pr
 ```tsx
 'use client';
 
-import { RootProvider } from 'fumadocs-ui/provider';
+import { RootProvider } from '@maximai/fumadocs-ui/provider';
 import dynamic from 'next/dynamic';
 
 const SearchDialog = dynamic(() => import('@/components/search'));
@@ -47,7 +47,7 @@ Add custom link items to search dialog.
 They are shown as fallbacks when the query is empty.
 
 ```jsx
-import { RootProvider } from 'fumadocs-ui/root-provider';
+import { RootProvider } from '@maximai/fumadocs-ui/root-provider';
 
 <RootProvider
   search={{
@@ -105,8 +105,8 @@ First, create a separate client component for the dialog.
 
 ```tsx title="Client Component"
 import algo from 'algoliasearch/lite';
-import type { SharedProps } from 'fumadocs-ui/components/dialog/search';
-import SearchDialog from 'fumadocs-ui/components/dialog/search-algolia';
+import type { SharedProps } from '@maximai/fumadocs-ui/components/dialog/search';
+import SearchDialog from '@maximai/fumadocs-ui/components/dialog/search-algolia';
 
 const client = algo(appId, apiKey);
 const index = client.initIndex(indexName);
@@ -121,7 +121,7 @@ Replace `appId`, `apiKey` and `indexName` with your desired values.
 Then, lazy load the dialog with `next/dynamic`.
 
 ```tsx title="Provider (Client Component)"
-import { RootProvider } from 'fumadocs-ui/provider';
+import { RootProvider } from '@maximai/fumadocs-ui/provider';
 import dynamic from 'next/dynamic';
 import type { ReactNode } from 'react';
 
@@ -163,7 +163,7 @@ you may use the `SearchDialog` component.
 import {
   SearchDialog,
   type SharedProps
-} from 'fumadocs-ui/components/dialog/search'
+} from '@maximai/fumadocs-ui/components/dialog/search'
 
 export default function CustomSearchDialog(props: SharedProps) { ... }
 ```

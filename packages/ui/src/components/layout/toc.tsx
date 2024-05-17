@@ -1,6 +1,6 @@
 import { TextIcon } from 'lucide-react';
-import type { TOCItemType } from 'fumadocs-core/server';
-import * as Primitive from 'fumadocs-core/toc-internal';
+import type { TOCItemType } from '@maximai/fumadocs-core/server';
+import * as Primitive from '@maximai/fumadocs-core/toc-internal';
 import { type ReactElement, type ReactNode, useCallback, useRef } from 'react';
 import { cn } from '@/utils/cn';
 import { useI18n } from '@/contexts/i18n';
@@ -33,7 +33,7 @@ export function Toc({ items, header, footer }: TOCProps): ReactElement {
   const { text } = useI18n();
 
   return (
-    <div className="sticky top-0 flex h-dvh w-[220px] flex-col gap-4 pe-2 pt-12 max-lg:hidden xl:w-[260px]">
+    <div className="sticky top-0 flex h-dvh w-[220px] flex-col gap-4 pe-2 pt-16 max-lg:hidden xl:w-[260px]">
       {header}
       <h3 className="-mb-1 -ms-0.5 inline-flex items-center gap-1.5 text-sm text-muted-foreground">
         <TextIcon className="size-4" />

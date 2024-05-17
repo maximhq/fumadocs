@@ -1,7 +1,7 @@
 // @ts-check
 import createBundleAnalyzer from '@next/bundle-analyzer';
 import createMDX from 'fumadocs-mdx/config';
-import { rehypeCodeDefaultOptions } from 'fumadocs-core/mdx-plugins';
+import { rehypeCodeDefaultOptions } from '@maximai/fumadocs-core/mdx-plugins';
 import {
   remarkDocGen,
   remarkInstall,
