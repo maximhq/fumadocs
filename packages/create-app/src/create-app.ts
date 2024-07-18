@@ -89,7 +89,7 @@ function createPackageJson(
     },
     dependencies: {
       next: versionPkg.dependencies.next,
-      'fumadocs-ui': localVersions['fumadocs-ui'],
+      '@maximai/fumadocs-ui': localVersions['@maximai/fumadocs-ui'],
       'fumadocs-core': localVersions['fumadocs-core'],
       react: versionPkg.dependencies.react,
       'react-dom': versionPkg.dependencies['react-dom'],

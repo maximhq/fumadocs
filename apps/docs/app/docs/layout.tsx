@@ -1,7 +1,7 @@
-import { DocsLayout } from 'fumadocs-ui/layout';
+import { DocsLayout } from '@maximai/fumadocs-ui/layout';
 import type { ReactNode } from 'react';
 import { docsOptions } from '@/app/layout.config';
-import 'fumadocs-ui/twoslash.css';
+import '@maximai/fumadocs-ui/twoslash.css';
 
 export default function Layout({
   children,

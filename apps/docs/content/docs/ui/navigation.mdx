@@ -3,7 +3,7 @@ title: Navigation
 description: Configuring navigation elements
 ---
 
-import { Files, Folder, File } from 'fumadocs-ui/components/files';
+import { Files, Folder, File } from '@maximai/fumadocs-ui/components/files';
 
 ## Introduction
 
@@ -22,7 +22,7 @@ You can see [Organizing Pages](/docs/ui/page-conventions) to learn how to custom
 It is passed to the [Docs Layout](/docs/ui/blocks/layout) component and shared to navigation elements:
 
 ```tsx
-import { DocsLayout } from 'fumadocs-ui/layout';
+import { DocsLayout } from '@maximai/fumadocs-ui/layout';
 
 <DocsLayout
   tree={
@@ -39,7 +39,7 @@ They are displayed on all Fumadocs UI layouts (e.g. Home Layout and Docs Layout)
 Links items are passed to the layout.
 
 ```tsx
-import { DocsLayout } from 'fumadocs-ui/layout';
+import { DocsLayout } from '@maximai/fumadocs-ui/layout';
 
 // any Fumadocs UI layout
 <DocsLayout
@@ -54,7 +54,7 @@ import { DocsLayout } from 'fumadocs-ui/layout';
 A shortcut for adding GitHub repository link item.
 
 ```tsx
-import { DocsLayout } from 'fumadocs-ui/layout';
+import { DocsLayout } from '@maximai/fumadocs-ui/layout';
 
 // any Fumadocs UI layout
 <DocsLayout githubUrl="https://github.com" />;
@@ -65,7 +65,7 @@ import { DocsLayout } from 'fumadocs-ui/layout';
 A part of all Fumadocs UI layouts, it displays the link items and your logo.
 
 ```tsx
-import { DocsLayout } from 'fumadocs-ui/layout';
+import { DocsLayout } from '@maximai/fumadocs-ui/layout';
 
 // any Fumadocs UI layout
 <DocsLayout
@@ -90,7 +90,7 @@ You can use them to add additional components.
 For example, adding an announcement to the top of sidebar.
 
 ```tsx
-import { DocsLayout } from 'fumadocs-ui/layout';
+import { DocsLayout } from '@maximai/fumadocs-ui/layout';
 
 <DocsLayout
   sidebar={{
@@ -116,7 +116,7 @@ Generally, it is generated from the Markdown/MDX content (usually supplied by th
 You may modify the data passed to `toc` (e.g. adding another anchor or modify the text).
 
 ```tsx
-import { DocsPage } from 'fumadocs-ui/page';
+import { DocsPage } from '@maximai/fumadocs-ui/page';
 
 <DocsPage
   toc={
@@ -130,7 +130,7 @@ import { DocsPage } from 'fumadocs-ui/page';
 It exposes a `banner` and `footer` option, use it to add additional components about the page.
 
 ```tsx
-import { DocsPage } from 'fumadocs-ui/page';
+import { DocsPage } from '@maximai/fumadocs-ui/page';
 
 <DocsPage
   tableOfContent={{
@@ -148,7 +148,7 @@ On smaller devices, it is shown as a popover (dropdown) component. You can also 
 To display the same banner/footer on both modes, pass them individually.
 
 ```tsx
-import { DocsPage } from 'fumadocs-ui/page';
+import { DocsPage } from '@maximai/fumadocs-ui/page';
 
 <DocsPage
   tableOfContent={{
@@ -178,7 +178,7 @@ By default, meaningless parts like the page tree root are omitted.
 You can customise its behaviour with the exposed options.
 
 ```tsx
-import { DocsPage } from 'fumadocs-ui/page';
+import { DocsPage } from '@maximai/fumadocs-ui/page';
 
 <DocsPage
   breadcrumb={
@@ -199,7 +199,7 @@ By default, it selects the neighbour nodes of the active node in page tree.
 You can specify the items of footer.
 
 ```tsx
-import { DocsPage } from 'fumadocs-ui/page';
+import { DocsPage } from '@maximai/fumadocs-ui/page';
 
 <DocsPage
   footer={{

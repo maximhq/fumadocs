@@ -105,7 +105,7 @@
 - 0a377a9: **Support writing code blocks as a `<Tab />` element.**
 
   ````mdx
-  import { Tabs } from 'fumadocs-ui/components/tabs';
+  import { Tabs } from '@maximai/fumadocs-ui/components/tabs';
 
   <Tabs items={["Tab 1", "Tab 2"]}>
 
@@ -402,7 +402,7 @@
   migrate: Use `fumadocs-typescript` instead.
 
   ```diff
-  - import { AutoTypeTable } from "fumadocs-ui/components/auto-type-table"
+  - import { AutoTypeTable } from "@maximai/fumadocs-ui/components/auto-type-table"
   + import { AutoTypeTable } from "fumadocs-typescript/ui"
   ```
 
@@ -496,7 +496,7 @@
 
   `next-docs-zeta` -> `fumadocs-core`
 
-  `next-docs-ui` -> `fumadocs-ui`
+  `next-docs-ui` -> `@maximai/fumadocs-ui`
 
   `next-docs-mdx` -> `fumadocs-mdx`
 

@@ -34,7 +34,7 @@ In the main body of page, find the corresponding page according to the slug and 
 You also need a table of contents, which can be generated with your own implementation, or using the [`getTableOfContents`](/docs/headless/utils/get-toc) utility (Markdown/MDX only).
 
 ```tsx
-import { DocsPage, DocsBody } from 'fumadocs-ui/page';
+import { DocsPage, DocsBody } from '@maximai/fumadocs-ui/page';
 import { getPage } from './my-content-source';
 import { notFound } from 'next/navigation';
 
@@ -86,7 +86,7 @@ There's an example:
 ```tsx
 import { compileMDX } from '@fumadocs/mdx-remote';
 import { getPage } from './my-content-source';
-import { DocsBody, DocsPage } from 'fumadocs-ui/page';
+import { DocsBody, DocsPage } from '@maximai/fumadocs-ui/page';
 
 export default function Page({ params }: { params: { slug?: string[] } }) {
   const page = getPage(params.slug);

@@ -6,7 +6,7 @@ import {
 } from 'react';
 import { Plus, Trash2 } from 'lucide-react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
-import { cn, buttonVariants } from 'fumadocs-ui/components/api';
+import { cn, buttonVariants } from '@maximai/fumadocs-ui/components/api';
 import { useOnChange } from 'fumadocs-core/utils/use-on-change';
 import {
   Select,
