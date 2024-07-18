@@ -184,7 +184,7 @@
 
   `next-docs-zeta` -> `fumadocs-core`
 
-  `next-docs-ui` -> `fumadocs-ui`
+  `next-docs-ui` -> `@maximai/fumadocs-ui`
 
   `next-docs-mdx` -> `fumadocs-mdx`
 

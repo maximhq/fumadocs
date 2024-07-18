@@ -24,7 +24,7 @@ Add custom link items to search dialog.
 They are shown as fallbacks when the query is empty.
 
 ```jsx
-import { RootProvider } from 'fumadocs-ui/root-provider';
+import { RootProvider } from '@maximai/fumadocs-ui/root-provider';
 
 <RootProvider
   search={{
@@ -43,7 +43,7 @@ import { RootProvider } from 'fumadocs-ui/root-provider';
 To opt-out of document search, disable it from root provider.
 
 ```tsx
-import { RootProvider } from 'fumadocs-ui/root-provider';
+import { RootProvider } from '@maximai/fumadocs-ui/root-provider';
 
 <RootProvider
   search={{
@@ -59,7 +59,7 @@ import { RootProvider } from 'fumadocs-ui/root-provider';
 Customise the hot keys to trigger search dialog.
 
 ```tsx
-import { RootProvider } from 'fumadocs-ui/root-provider';
+import { RootProvider } from '@maximai/fumadocs-ui/root-provider';
 
 <RootProvider
   search={{
@@ -80,7 +80,7 @@ import { RootProvider } from 'fumadocs-ui/root-provider';
 Configure tag filtering on the default search client.
 
 ```tsx
-import { RootProvider } from 'fumadocs-ui/root-provider';
+import { RootProvider } from '@maximai/fumadocs-ui/root-provider';
 
 <RootProvider
   search={{
@@ -111,8 +111,8 @@ Create a separate client component for the dialog.
 ```tsx title="components/search.tsx"
 'use client';
 import algo from 'algoliasearch/lite';
-import type { SharedProps } from 'fumadocs-ui/components/dialog/search';
-import SearchDialog from 'fumadocs-ui/components/dialog/search-algolia';
+import type { SharedProps } from '@maximai/fumadocs-ui/components/dialog/search';
+import SearchDialog from '@maximai/fumadocs-ui/components/dialog/search-algolia';
 
 const client = algo(appId, apiKey);
 const index = client.initIndex(indexName);
@@ -130,7 +130,7 @@ Inside the new provider, lazy load the dialog and pass it to Root Provider.
 
 ```tsx title="app/provider.tsx"
 'use client';
-import { RootProvider } from 'fumadocs-ui/provider';
+import { RootProvider } from '@maximai/fumadocs-ui/provider';
 import dynamic from 'next/dynamic';
 import type { ReactNode } from 'react';
 
@@ -161,7 +161,7 @@ javascript client).
 Same as the default search client, you can configure tag filtering with the `tags` prop.
 
 ```tsx title="components/search.tsx"
-import SearchDialog from 'fumadocs-ui/components/dialog/search-algolia';
+import SearchDialog from '@maximai/fumadocs-ui/components/dialog/search-algolia';
 
 <SearchDialog
   defaultTag="value"
@@ -184,7 +184,7 @@ Since you cannot pass a function to client components, wrap the provider in anot
 ```tsx
 'use client';
 
-import { RootProvider } from 'fumadocs-ui/provider';
+import { RootProvider } from '@maximai/fumadocs-ui/provider';
 import dynamic from 'next/dynamic';
 
 const SearchDialog = dynamic(() => import('@/components/search'));
@@ -211,7 +211,7 @@ you may use the `SearchDialog` component.
 import {
   SearchDialog,
   type SharedProps
-} from 'fumadocs-ui/components/dialog/search'
+} from '@maximai/fumadocs-ui/components/dialog/search'
 
 export default function CustomSearchDialog(props: SharedProps) { ... }
 ```

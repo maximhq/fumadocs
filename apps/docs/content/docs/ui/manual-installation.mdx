@@ -9,7 +9,7 @@ icon: Rocket
 Create a new Next.js application with `create-next-app`, and install required packages.
 
 ```package-install
-fumadocs-ui fumadocs-core
+@maximai/fumadocs-ui fumadocs-core
 ```
 
 ### Configuration
@@ -29,7 +29,7 @@ You have to configure the library correctly following their setup guide before c
 Wrap the entire application inside [Root Provider](/docs/ui/blocks/root-provider).
 
 ```tsx
-import { RootProvider } from 'fumadocs-ui/provider';
+import { RootProvider } from '@maximai/fumadocs-ui/provider';
 import type { ReactNode } from 'react';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -51,7 +51,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 Import the pre-built stylesheet in the root layout.
 
 ```ts title="layout.tsx"
-import 'fumadocs-ui/style.css';
+import '@maximai/fumadocs-ui/style.css';
 ```
 
     </Tab>
@@ -79,7 +79,7 @@ Use the official Tailwind CSS plugin.
 Create a new catch-all route `/app/docs/[[..slugs]]` for our docs, and give it a proper layout.
 
 ```tsx title="app/docs/layout.tsx"
-import { DocsLayout } from 'fumadocs-ui/layout';
+import { DocsLayout } from '@maximai/fumadocs-ui/layout';
 import { pageTree } from '@/app/source';
 import type { ReactNode } from 'react';
 

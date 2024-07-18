@@ -1,10 +1,10 @@
-import { RootProvider } from 'fumadocs-ui/provider';
-import 'fumadocs-ui/style.css';
+import { RootProvider } from '@maximai/fumadocs-ui/provider';
+import '@maximai/fumadocs-ui/style.css';
 import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
-import { I18nProvider } from 'fumadocs-ui/i18n';
+import { I18nProvider } from '@maximai/fumadocs-ui/i18n';
 import { pageTree } from '@/app/source';
-import { DocsLayout } from 'fumadocs-ui/layout';
+import { DocsLayout } from '@maximai/fumadocs-ui/layout';
 
 const inter = Inter({
   subsets: ['latin'],

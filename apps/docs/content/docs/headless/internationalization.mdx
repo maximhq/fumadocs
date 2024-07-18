@@ -72,8 +72,8 @@ export default function Layout({
 A `I18nProvider` is needed for localization. Wrap the root provider inside your I18n provider.
 
 ```tsx
-import { RootProvider } from 'fumadocs-ui/provider';
-import { I18nProvider } from 'fumadocs-ui/i18n';
+import { RootProvider } from '@maximai/fumadocs-ui/provider';
+import { I18nProvider } from '@maximai/fumadocs-ui/i18n';
 
 export default function RootLayout({
   params,
@@ -184,7 +184,7 @@ export default createI18nMiddleware({
 We only provide english translation by default, you have to pass your translations to the provider.
 
 ```tsx
-import { I18nProvider } from 'fumadocs-ui/i18n';
+import { I18nProvider } from '@maximai/fumadocs-ui/i18n';
 
 <I18nProvider
   translations={{
@@ -203,7 +203,7 @@ import { I18nProvider } from 'fumadocs-ui/i18n';
 To allow users changing their language, enable `i18n` on docs layout.
 
 ```tsx title="[lang]/docs/layout.tsx"
-import { DocsLayout } from 'fumadocs-ui/layout';
+import { DocsLayout } from '@maximai/fumadocs-ui/layout';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return <DocsLayout i18n>{children}</DocsLayout>;

@@ -1,4 +1,4 @@
-# fumadocs-typescript
+# @maximai/fumadocs-typescript
 
 ## 2.0.1
 

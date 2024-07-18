@@ -53,6 +53,12 @@ importers:
 
   apps/docs:
     dependencies:
+      '@maximai/fumadocs-typescript':
+        specifier: workspace:^
+        version: link:../../packages/typescript
+      '@maximai/fumadocs-ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       '@next/env':
         specifier: ^14.2.5
         version: 14.2.5
@@ -86,12 +92,6 @@ importers:
       fumadocs-twoslash:
         specifier: workspace:^
         version: link:../../packages/twoslash
-      fumadocs-typescript:
-        specifier: workspace:^
-        version: link:../../packages/typescript
-      fumadocs-ui:
-        specifier: workspace:*
-        version: link:../../packages/ui
       geist:
         specifier: ^1.3.1
         version: 1.3.1(next@14.2.5(@babel/core@7.24.0)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
@@ -189,12 +189,12 @@ importers:
       '@fumadocs/content-collections':
         specifier: workspace:*
         version: link:../../packages/content-collections
+      '@maximai/fumadocs-ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       fumadocs-core:
         specifier: workspace:*
         version: link:../../packages/core
-      fumadocs-ui:
-        specifier: workspace:*
-        version: link:../../packages/ui
       next:
         specifier: ^14.2.5
         version: 14.2.5(@babel/core@7.24.0)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -229,15 +229,15 @@ importers:
 
   examples/i18n:
     dependencies:
+      '@maximai/fumadocs-ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       fumadocs-core:
         specifier: workspace:*
         version: link:../../packages/core
       fumadocs-mdx:
         specifier: workspace:*
         version: link:../../packages/mdx
-      fumadocs-ui:
-        specifier: workspace:*
-        version: link:../../packages/ui
       next:
         specifier: ^14.2.5
         version: 14.2.5(@babel/core@7.24.0)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -263,15 +263,15 @@ importers:
 
   examples/next-mdx:
     dependencies:
+      '@maximai/fumadocs-ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       fumadocs-core:
         specifier: workspace:*
         version: link:../../packages/core
       fumadocs-mdx:
         specifier: workspace:*
         version: link:../../packages/mdx
-      fumadocs-ui:
-        specifier: workspace:*
-        version: link:../../packages/ui
       next:
         specifier: ^14.2.5
         version: 14.2.5(@babel/core@7.24.0)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -300,12 +300,12 @@ importers:
       '@fumadocs/mdx-remote':
         specifier: workspace:*
         version: link:../../packages/mdx-remote
+      '@maximai/fumadocs-ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       fumadocs-core:
         specifier: workspace:*
         version: link:../../packages/core
-      fumadocs-ui:
-        specifier: workspace:*
-        version: link:../../packages/ui
       next:
         specifier: ^14.2.5
         version: 14.2.5(@babel/core@7.24.0)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -529,12 +529,12 @@ importers:
 
   packages/doc-gen:
     dependencies:
+      '@maximai/fumadocs-typescript':
+        specifier: workspace:^
+        version: link:../typescript
       estree-util-value-to-estree:
         specifier: ^3.1.2
         version: 3.1.2
-      fumadocs-typescript:
-        specifier: workspace:^
-        version: link:../typescript
       hast-util-to-estree:
         specifier: ^3.1.0
         version: 3.1.0
@@ -699,6 +699,9 @@ importers:
       '@apidevtools/json-schema-ref-parser':
         specifier: ^11.6.4
         version: 11.6.4
+      '@maximai/fumadocs-ui':
+        specifier: workspace:*
+        version: link:../ui
       '@radix-ui/react-select':
         specifier: ^2.1.1
         version: 2.1.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -714,9 +717,6 @@ importers:
       fumadocs-core:
         specifier: workspace:*
         version: link:../core
-      fumadocs-ui:
-        specifier: workspace:*
-        version: link:../ui
       js-yaml:
         specifier: ^4.1.0
         version: 4.1.0
@@ -824,6 +824,9 @@ importers:
         specifier: '*'
         version: 5.4.5
     devDependencies:
+      '@maximai/fumadocs-ui':
+        specifier: workspace:*
+        version: link:../ui
       '@types/estree':
         specifier: ^1.0.5
         version: 1.0.5
@@ -842,9 +845,6 @@ importers:
       eslint-config-custom:
         specifier: workspace:*
         version: link:../eslint-config-custom
-      fumadocs-ui:
-        specifier: workspace:*
-        version: link:../ui
       tsconfig:
         specifier: workspace:*
         version: link:../tsconfig

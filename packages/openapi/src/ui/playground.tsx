@@ -1,8 +1,11 @@
 import { type HTMLAttributes, useMemo, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useSWRImmutable from 'swr/immutable';
-import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
-import { cn, buttonVariants } from 'fumadocs-ui/components/api';
+import {
+  Accordion,
+  Accordions,
+} from '@maximai/fumadocs-ui/components/accordion';
+import { cn, buttonVariants } from '@maximai/fumadocs-ui/components/api';
 import { useApiContext } from '@/ui/contexts/api';
 import { Form } from '@/ui/components/form';
 import { createBodyFromValue, getStatusInfo } from '@/ui/fetcher';

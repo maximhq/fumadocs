@@ -7,7 +7,7 @@ import {
   generateDocumentation,
   renderMarkdownToHast,
   type DocEntry,
-} from 'fumadocs-typescript';
+} from '@maximai/fumadocs-typescript';
 import { createElement, expressionToAttribute } from './utils';
 import type { DocGenerator } from './remark-docgen';
 
