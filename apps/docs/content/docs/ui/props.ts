@@ -18,7 +18,7 @@ import type { Card } from '@maximai/fumadocs-ui/components/card';
 import type { DocsLayoutProps } from '@maximai/fumadocs-ui/layout';
 import type { AnchorHTMLAttributes, ComponentPropsWithoutRef } from 'react';
 import type { DocsPageProps } from '@maximai/fumadocs-ui/page';
-import type { AutoTypeTable } from 'fumadocs-typescript/ui';
+import type { AutoTypeTable } from '@maximai/fumadocs-typescript/ui';
 
 export type AccordionsProps = Omit<
   ComponentPropsWithoutRef<typeof Accordions>,

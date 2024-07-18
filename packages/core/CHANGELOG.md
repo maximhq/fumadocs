@@ -395,15 +395,15 @@
 
 ### Major Changes
 
-- 321d1e1f: **Move Typescript integrations to `fumadocs-typescript`**
+- 321d1e1f: **Move Typescript integrations to `@maximai/fumadocs-typescript`**
 
   why: It is now a stable feature
 
-  migrate: Use `fumadocs-typescript` instead.
+  migrate: Use `@maximai/fumadocs-typescript` instead.
 
   ```diff
   - import { AutoTypeTable } from "@maximai/fumadocs-ui/components/auto-type-table"
-  + import { AutoTypeTable } from "fumadocs-typescript/ui"
+  + import { AutoTypeTable } from "@maximai/fumadocs-typescript/ui"
   ```
 
 ### Minor Changes
