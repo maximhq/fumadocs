@@ -1,5 +1,5 @@
 import * as OpenAPI from 'fumadocs-openapi';
-import * as Typescript from 'fumadocs-typescript';
+import * as Typescript from '@maximai/fumadocs-typescript';
 import * as path from 'node:path';
 import { rimrafSync } from 'rimraf';
 

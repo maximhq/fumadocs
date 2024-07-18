@@ -30,7 +30,7 @@ export const modes: Mode[] = [
   {
     param: 'ui',
     name: 'UI',
-    package: 'fumadocs-ui',
+    package: '@maximai/fumadocs-ui',
     description: 'The user interface',
     version: ui.version,
     icon: LayoutIcon,

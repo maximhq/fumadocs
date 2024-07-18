@@ -9,7 +9,7 @@ icon: Rocket
 Create a new Next.js application with `create-next-app`, and install required packages.
 
 ```package-install
-fumadocs-ui fumadocs-core
+@maximai/fumadocs-ui fumadocs-core
 ```
 
 ### Configuration
@@ -29,10 +29,10 @@ You have to configure the library correctly following their setup guide before c
 Wrap the entire application inside [Root Provider](/docs/ui/blocks/root-provider).
 
 ```tsx
-import { RootProvider } from 'fumadocs-ui/provider';
+import { RootProvider } from '@maximai/fumadocs-ui/provider';
 import type { ReactNode } from 'react';
 
-export default function Layout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body>
@@ -51,7 +51,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 Import the pre-built stylesheet in the root layout.
 
 ```ts title="layout.tsx"
-import 'fumadocs-ui/style.css';
+import '@maximai/fumadocs-ui/style.css';
 ```
 
     </Tab>
@@ -76,21 +76,19 @@ Use the official Tailwind CSS plugin.
 
 ### Layout
 
-Create a `app/layout.config.tsx` file to put the shared options for our layouts.
+Create a new catch-all route `/app/docs/[[..slugs]]` for our docs, and give it a proper layout.
 
-```json doc-gen:file
-{
-  "file": "../../examples/next-mdx/app/layout.config.tsx",
-  "codeblock": true
-}
-```
+```tsx title="app/docs/layout.tsx"
+import { DocsLayout } from '@maximai/fumadocs-ui/layout';
+import { pageTree } from '@/app/source';
+import type { ReactNode } from 'react';
 
-Create a folder `/app/docs` for our docs, and give it a proper layout.
-
-```json doc-gen:file
-{
-  "file": "../../examples/next-mdx/app/docs/layout.tsx",
-  "codeblock": true
+export default function RootDocsLayout({ children }: { children: ReactNode }) {
+  return (
+    <DocsLayout tree={pageTree} nav={{ title: 'My App' }}>
+      {children}
+    </DocsLayout>
+  );
 }
 ```
 
@@ -98,12 +96,11 @@ Create a folder `/app/docs` for our docs, and give it a proper layout.
 
 ### Page
 
-Create a catch-all route `/app/docs/[[...slug]]` for docs pages.
+For the `page.tsx`, it may vary depending on your source. You should configure static rendering with `generateStaticParams` and metadata with `generateMetadata`.
 
-In the page, wrap your content in the [Page](/docs/ui/blocks/page) component.
-It may vary depending on your content source. You should configure static rendering with `generateStaticParams` and metadata with `generateMetadata`.
+Wrap your content in the [Page](/docs/ui/blocks/page) component.
 
-<Tabs groupId='content-source' items={['Fumadocs MDX', 'Content Collections']}>
+<Tabs id='content-source' items={['Fumadocs MDX', 'Content Collections']}>
 
 ```json doc-gen:file
 {
@@ -129,7 +126,7 @@ It may vary depending on your content source. You should configure static render
 
 Use the default document search based on Flexsearch.
 
-<Tabs groupId='content-source' items={['Fumadocs MDX', 'Content Collections']}>
+<Tabs id='content-source' items={['Fumadocs MDX', 'Content Collections']}>
 
 ```json doc-gen:file
 {

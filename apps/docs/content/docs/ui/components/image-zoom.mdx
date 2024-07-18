@@ -1,23 +1,19 @@
 ---
-title: Zoomable Image
+title: Zoom Image
 description: Allow zoom-in images in your documentation
 preview: zoom-image
 ---
 
 ## Usage
 
-Replace `img` with `ImageZoom` in your MDX components.
+Add it to your MDX components.
 
 > A default `sizes` property will be defined if not specified
 
-```tsx title="page.tsx"
-import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
-import defaultMdxComponents from 'fumadocs-ui/mdx';
+```tsx
+import { ImageZoom } from '@maximai/fumadocs-ui/components/image-zoom';
 
-<MDX
-  components={{
-    ...defaultMdxComponents,
-    img: (props) => <ImageZoom {...(props as any)} />,
-  }}
-/>;
+const components = {
+  img: (props) => <ImageZoom {...props} />,
+};
 ```

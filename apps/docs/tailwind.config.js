@@ -1,5 +1,5 @@
 // @ts-check
-import { createPreset, presets } from 'fumadocs-ui/tailwind-plugin';
+import { createPreset, presets } from '@maximai/fumadocs-ui/tailwind-plugin';
 import animate from 'tailwindcss-animate';
 
 /** @type {import('tailwindcss').Config} */
@@ -9,7 +9,7 @@ export default {
     './app/**/*.{ts,tsx}',
     './content/**/*.{mdx,tsx}',
     './mdx-components.tsx',
-    './node_modules/fumadocs-ui/dist/**/*.js',
+    './node_modules/@maximai/fumadocs-ui/dist/**/*.js',
     './node_modules/fumadocs-openapi/dist/**/*.js',
   ],
   presets: [

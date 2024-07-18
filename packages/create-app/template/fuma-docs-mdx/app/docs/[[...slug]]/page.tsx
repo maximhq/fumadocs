@@ -1,42 +1,41 @@
-import { source } from '@/app/source';
+import { getPage, getPages } from '@/app/source';
 import type { Metadata } from 'next';
-import {
-  DocsPage,
-  DocsBody,
-  DocsDescription,
-  DocsTitle,
-} from 'fumadocs-ui/page';
+import { DocsPage, DocsBody } from '@maximai/fumadocs-ui/page';
 import { notFound } from 'next/navigation';
-import defaultMdxComponents from 'fumadocs-ui/mdx';
 
 export default async function Page({
   params,
 }: {
   params: { slug?: string[] };
 }) {
-  const page = source.getPage(params.slug);
-  if (!page) notFound();
+  const page = getPage(params.slug);
 
-  const MDX = page.data.body;
+  if (page == null) {
+    notFound();
+  }
+
+  const MDX = page.data.exports.default;
 
   return (
-    <DocsPage toc={page.data.toc} full={page.data.full}>
-      <DocsTitle>{page.data.title}</DocsTitle>
-      <DocsDescription>{page.data.description}</DocsDescription>
+    <DocsPage toc={page.data.exports.toc} full={page.data.full}>
       <DocsBody>
-        <MDX components={{ ...defaultMdxComponents }} />
+        <h1>{page.data.title}</h1>
+        <MDX />
       </DocsBody>
     </DocsPage>
   );
 }
 
 export async function generateStaticParams() {
-  return source.generateParams();
+  return getPages().map((page) => ({
+    slug: page.slugs,
+  }));
 }
 
 export function generateMetadata({ params }: { params: { slug?: string[] } }) {
-  const page = source.getPage(params.slug);
-  if (!page) notFound();
+  const page = getPage(params.slug);
+
+  if (page == null) notFound();
 
   return {
     title: page.data.title,

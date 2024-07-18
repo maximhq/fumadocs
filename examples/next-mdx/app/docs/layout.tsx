@@ -1,11 +1,10 @@
-import { source } from '../source';
-import { DocsLayout } from 'fumadocs-ui/layout';
+import { pageTree } from '../source';
+import { DocsLayout } from '@maximai/fumadocs-ui/layout';
 import type { ReactNode } from 'react';
-import { baseOptions } from '@/app/layout.config';
 
-export default function Layout({ children }: { children: ReactNode }) {
+export default function RootDocsLayout({ children }: { children: ReactNode }) {
   return (
-    <DocsLayout tree={source.pageTree} {...baseOptions}>
+    <DocsLayout tree={pageTree} nav={{ title: 'My App' }}>
       {children}
     </DocsLayout>
   );

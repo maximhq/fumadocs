@@ -21,15 +21,18 @@ const config = {
 
 Define the required components.
 
-```tsx title="page.tsx (Fumadocs UI)"
-import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+```tsx title="mdx-components.tsx"
+// With Fumadocs UI
+import { Tab, Tabs } from '@maximai/fumadocs-ui/components/tabs';
+import type { MDXComponents } from 'mdx/types';
 
-<MDX
-  components={{
+export function useMDXComponents(components: MDXComponents) {
+  return {
+    ...components,
     Tab,
     Tabs,
-  }}
-/>;
+  };
+}
 ```
 
 | Component |                                   |
@@ -92,7 +95,7 @@ const config = {
 This will instead generate:
 
 ```mdx
-<Tabs groupId="some-id" persist items={[...]}>
+<Tabs id="some-id" persist items={[...]}>
   ...
 <Tabs>
 ```

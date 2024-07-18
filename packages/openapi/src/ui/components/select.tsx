@@ -1,7 +1,7 @@
 import * as SelectPrimitive from '@radix-ui/react-select';
 import { Check, ChevronDown, ChevronUp } from 'lucide-react';
 import { forwardRef } from 'react';
-import { cn } from 'fumadocs-ui/components/api';
+import { cn } from '@maximai/fumadocs-ui/components/api';
 
 const Select = SelectPrimitive.Root;
 

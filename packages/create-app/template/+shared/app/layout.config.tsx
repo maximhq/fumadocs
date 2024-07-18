@@ -1,12 +1,8 @@
-import { type HomeLayoutProps } from 'fumadocs-ui/home-layout';
+import { type DocsLayoutProps } from '@maximai/fumadocs-ui/layout';
+import { type HomeLayoutProps } from '@maximai/fumadocs-ui/home-layout';
+import { pageTree } from '@/app/source';
 
-/**
- * Shared layout configurations
- *
- * you can configure layouts individually from:
- * Home Layout: app/(home)/layout.tsx
- * Docs Layout: app/docs/layout.tsx
- */
+// shared configuration
 export const baseOptions: HomeLayoutProps = {
   nav: {
     title: 'My App',
@@ -18,4 +14,10 @@ export const baseOptions: HomeLayoutProps = {
       active: 'nested-url',
     },
   ],
+};
+
+// docs layout configuration
+export const docsOptions: DocsLayoutProps = {
+  ...baseOptions,
+  tree: pageTree,
 };

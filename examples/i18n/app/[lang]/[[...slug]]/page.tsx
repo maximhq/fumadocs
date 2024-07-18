@@ -1,37 +1,38 @@
-import { source } from '@/app/source';
+import { getPage, getLanguages } from '@/app/source';
 import type { Metadata } from 'next';
-import {
-  DocsPage,
-  DocsBody,
-  DocsTitle,
-  DocsDescription,
-} from 'fumadocs-ui/page';
+import { DocsPage, DocsBody } from '@maximai/fumadocs-ui/page';
 import { notFound } from 'next/navigation';
-import defaultMdxComponents from 'fumadocs-ui/mdx';
 
 export default async function Page({
   params,
 }: {
   params: { lang: string; slug?: string[] };
 }) {
-  const page = source.getPage(params.slug, params.lang);
-  if (!page) notFound();
+  const page = getPage(params.slug, params.lang);
 
-  const MDX = page.data.body;
+  if (page == null) {
+    notFound();
+  }
+
+  const MDX = page.data.exports.default;
 
   return (
-    <DocsPage toc={page.data.toc}>
-      <DocsTitle>{page.data.title}</DocsTitle>
-      <DocsDescription>{page.data.description}</DocsDescription>
+    <DocsPage toc={page.data.exports.toc}>
       <DocsBody>
-        <MDX components={{ ...defaultMdxComponents }} />
+        <h1>{page.data.title}</h1>
+        <MDX />
       </DocsBody>
     </DocsPage>
   );
 }
 
 export async function generateStaticParams() {
-  return source.generateParams();
+  return getLanguages().flatMap(({ language, pages }) =>
+    pages.map((page) => ({
+      lang: language,
+      slug: page.slugs,
+    })),
+  );
 }
 
 export function generateMetadata({
@@ -39,8 +40,9 @@ export function generateMetadata({
 }: {
   params: { lang: string; slug?: string[] };
 }) {
-  const page = source.getPage(params.slug, params.lang);
-  if (!page) notFound();
+  const page = getPage(params.slug, params.lang);
+
+  if (page == null) notFound();
 
   return {
     title: page.data.title,

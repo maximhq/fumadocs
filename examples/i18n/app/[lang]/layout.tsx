@@ -1,10 +1,10 @@
-import { RootProvider } from 'fumadocs-ui/provider';
-import 'fumadocs-ui/style.css';
+import { RootProvider } from '@maximai/fumadocs-ui/provider';
+import '@maximai/fumadocs-ui/style.css';
 import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
-import { I18nProvider } from 'fumadocs-ui/i18n';
-import { source } from '@/app/source';
-import { DocsLayout } from 'fumadocs-ui/layout';
+import { I18nProvider } from '@maximai/fumadocs-ui/i18n';
+import { pageTree } from '@/app/source';
+import { DocsLayout } from '@maximai/fumadocs-ui/layout';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -22,35 +22,26 @@ export default function Layout({
       <body>
         <I18nProvider
           locale={lang}
-          locales={[
-            {
+          translations={{
+            en: {
               name: 'English',
-              locale: 'en',
             },
-            {
+            cn: {
               name: 'Chinese',
-              locale: 'cn',
+              toc: '目錄',
+              search: '搜尋文檔',
+              lastUpdate: '最後更新於',
+              searchNoResult: '沒有結果',
+              previousPage: '上一頁',
+              nextPage: '下一頁',
             },
-          ]}
-          translations={
-            {
-              cn: {
-                toc: '目錄',
-                search: '搜尋文檔',
-                lastUpdate: '最後更新於',
-                searchNoResult: '沒有結果',
-                previousPage: '上一頁',
-                nextPage: '下一頁',
-                chooseLanguage: '選擇語言',
-              },
-            }[lang]
-          }
+          }}
         >
           <RootProvider>
             <DocsLayout
-              tree={source.pageTree[lang]}
+              tree={pageTree[lang]}
               nav={{
-                title: lang === 'cn' ? '文檔' : 'My App',
+                title: lang === 'cn' ? '目錄' : 'My App',
                 url: `/${lang}`,
               }}
               i18n

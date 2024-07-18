@@ -3,8 +3,6 @@ title: Markdown
 description: How to write documents
 ---
 
-import { HomeIcon } from 'lucide-react';
-
 ## Introduction
 
 Fumadocs provides many useful extensions to MDX, a markup language. Here is a brief introduction to the default MDX syntax of Fumadocs UI.
@@ -74,9 +72,7 @@ see [MDX Syntax](https://mdxjs.com/docs/what-is-mdx/#mdx-syntax) to learn more.
 
 ### Cards
 
-Useful for adding links, it is included by default.
-
-Same as normal links, but you can display more information (e.g. icons).
+A [`Card`](/docs/ui/mdx/card) component is included by default. Similar to links, but you can display more information (e.g. icons).
 
 ```mdx
 <Cards>
@@ -93,76 +89,36 @@ Same as normal links, but you can display more information (e.g. icons).
     href="https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating"
     title="Fetching, Caching, and Revalidating"
     description="Learn more about caching in Next.js"
-  />
-</Cards>
-
-#### Icon
-
-You can specify an icon to cards.
-
-```mdx
-import { HomeIcon } from 'lucide-react';
-
-<Cards>
-  <Card
-    icon={<HomeIcon />}
-    href="/"
-    title="Home"
-    description="Go back to home"
-  />
-</Cards>
-```
-
-<Cards>
-  <Card
-    icon={<HomeIcon />}
-    href="/"
-    title="Home"
-    description="Go back to home"
   />
 </Cards>
 
 ### Callouts
 
-Useful for adding tips/warnings, it is included by default.
+Useful for adding tips/warnings, you have to import them.
 
 ```mdx
-<Callout>Hello World</Callout>
-```
+import { Callout } from '@maximai/fumadocs-ui/components/callout';
 
-<Callout>Hello World</Callout>
-
-#### Title
-
-Specify a callout title.
-
-```mdx
-<Callout title="Title">Hello World</Callout>
-```
-
-<Callout title="Title">Hello World</Callout>
-
-#### Types
-
-You can specify the type of callout.
-
-- `info` (default)
-- `warn`
-- `error`
-
-```mdx
+<Callout title="Title" type="info">
+  Hello World
+</Callout>
+<Callout title="Title" type="warn">
+  Hello World
+</Callout>
 <Callout title="Title" type="error">
   Hello World
 </Callout>
 ```
 
+<Callout title="Title" type="info">
+  Hello World
+</Callout>
+<Callout title="Title" type="warn">
+  Hello World
+</Callout>
 <Callout title="Title" type="error">
   Hello World
 </Callout>
-
-### Customisation
-
-See [all MDX components and available options](/docs/ui/mdx).
 
 ## Heading Anchors
 
@@ -242,7 +198,7 @@ const config = {
 You can use code block as a `<Tab />` component.
 
 ````mdx
-import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Tab, Tabs } from '@maximai/fumadocs-ui/components/tabs';
 
 <Tabs items={["Tab 1", "Tab 2"]}>
 

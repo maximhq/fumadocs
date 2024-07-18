@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { InlineTOC } from 'fumadocs-ui/components/inline-toc';
-import defaultMdxComponents from 'fumadocs-ui/mdx';
-import { blog } from '@/app/source';
+import { InlineTOC } from '@maximai/fumadocs-ui/components/inline-toc';
+import { blog } from '@/utils/source';
 import { createMetadata } from '@/utils/metadata';
 import { buttonVariants } from '@/components/ui/button';
 import { Control } from '@/app/(home)/blog/[slug]/page.client';
@@ -11,6 +10,8 @@ import { Control } from '@/app/(home)/blog/[slug]/page.client';
 interface Param {
   slug: string;
 }
+
+export const dynamicParams = false;
 
 export default function Page({
   params,
@@ -48,16 +49,16 @@ export default function Page({
       </div>
       <article className="container grid grid-cols-1 px-0 py-8 lg:grid-cols-[2fr_1fr] lg:px-4">
         <div className="prose p-4">
-          <InlineTOC items={page.data.toc} />
-          <page.data.body components={defaultMdxComponents} />
+          <InlineTOC items={page.data.exports.toc} />
+          <page.data.exports.default />
         </div>
         <div className="flex flex-col gap-4 border-l p-4 text-sm">
           <div>
-            <p className="mb-1 text-fd-muted-foreground">Written by</p>
+            <p className="mb-1 text-muted-foreground">Written by</p>
             <p className="font-medium">{page.data.author}</p>
           </div>
           <div>
-            <p className="mb-1 text-sm text-fd-muted-foreground">At</p>
+            <p className="mb-1 text-sm text-muted-foreground">At</p>
             <p className="font-medium">
               {new Date(page.data.date ?? page.file.name).toDateString()}
             </p>
@@ -82,7 +83,7 @@ export function generateMetadata({ params }: { params: Param }): Metadata {
 }
 
 export function generateStaticParams(): Param[] {
-  return blog.getPages().map((page) => ({
+  return blog.getPages().map<Param>((page) => ({
     slug: page.slugs[0],
   }));
 }
