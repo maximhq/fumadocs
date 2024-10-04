@@ -6,7 +6,7 @@ description: Generate docs from Typescript definitions
 ## Usage
 
 ```package-install
-@maximai/fumadocs-typescript
+fumadocs-typescript
 ```
 
 ### UI Integration
@@ -18,7 +18,7 @@ It comes with the `AutoTypeTable` component. Learn more about [Auto Type Table](
 Generate from existing MDX files statically.
 
 ```js title="script.mjs"
-import { generateFiles } from '@maximai/fumadocs-typescript';
+import { generateFiles } from 'fumadocs-typescript';
 import * as path from 'node:path';
 
 void generateFiles({
@@ -62,7 +62,7 @@ If you want to customise generated output, use the `templates` option.
 Same as generating from MDX files, but you can pass the MDX file content directly.
 
 ```tsx
-import { generateMDX } from '@maximai/fumadocs-typescript';
+import { generateMDX } from 'fumadocs-typescript';
 import * as fs from 'node:fs/promises';
 
 const out = generateMDX(`# Title

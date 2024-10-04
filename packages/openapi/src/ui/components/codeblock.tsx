@@ -1,5 +1,5 @@
 import { type HTMLAttributes, useLayoutEffect, useState } from 'react';
-import * as Base from '@maximai/fumadocs-ui/components/codeblock';
+import * as Base from 'fumadocs-ui/components/codeblock';
 import { useApiContext } from '@/ui/contexts/api';
 import { sharedTransformers } from '@/utils/shiki';
 

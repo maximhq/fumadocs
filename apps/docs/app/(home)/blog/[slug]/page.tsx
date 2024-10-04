@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { InlineTOC } from '@maximai/fumadocs-ui/components/inline-toc';
+import { InlineTOC } from 'fumadocs-ui/components/inline-toc';
 import { blog } from '@/utils/source';
 import { createMetadata } from '@/utils/metadata';
 import { buttonVariants } from '@/components/ui/button';

@@ -45,12 +45,12 @@
   },
   "dependencies": {
     "@apidevtools/json-schema-ref-parser": "^11.6.4",
-    "@maximai/fumadocs-ui": "workspace:*",
     "@radix-ui/react-select": "^2.1.1",
     "@radix-ui/react-slot": "^1.1.0",
     "class-variance-authority": "^0.7.0",
     "fast-glob": "^3.3.1",
     "fumadocs-core": "workspace:*",
+    "fumadocs-ui": "workspace:*",
     "js-yaml": "^4.1.0",
     "json-schema-to-typescript": "^14.1.0",
     "lucide-react": "^0.408.0",

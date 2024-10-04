@@ -419,14 +419,14 @@
 - Updated dependencies [fccdfdb]
 - Updated dependencies [2ffd5ea]
   - fumadocs-core@12.5.4
-  - @maximai/fumadocs-ui@12.5.4
+  - fumadocs-ui@12.5.4
 
 ## 4.0.3
 
 ### Patch Changes
 
 - Updated dependencies [5d963f4]
-  - @maximai/fumadocs-ui@12.5.3
+  - fumadocs-ui@12.5.3
 
 ## 4.0.2
 
@@ -434,7 +434,7 @@
 
 - 0c8eddf: Fix overlap of navbar and api info
 - Updated dependencies [a5c34f0]
-  - @maximai/fumadocs-ui@12.5.2
+  - fumadocs-ui@12.5.2
 
 ## 4.0.1
 
@@ -442,13 +442,13 @@
 
 - Updated dependencies [c5d20d0]
 - Updated dependencies [3d8f6cf]
-  - @maximai/fumadocs-ui@12.5.1
+  - fumadocs-ui@12.5.1
 
 ## 4.0.0
 
 ### Major Changes
 
-- ad143e1: Move UI implementation from `@maximai/fumadocs-ui` to `fumadocs-openapi`.
+- ad143e1: Move UI implementation from `fumadocs-ui` to `fumadocs-openapi`.
 
   **why:** Allow a better organization of packages.
 
@@ -459,12 +459,12 @@
   Add the package to `content` under your Tailwind CSS configuration.
 
   ```js
-  import { createPreset, presets } from '@maximai/fumadocs-ui/tailwind-plugin';
+  import { createPreset, presets } from 'fumadocs-ui/tailwind-plugin';
 
   /** @type {import('tailwindcss').Config} */
   export default {
     content: [
-      './node_modules/@maximai/fumadocs-ui/dist/**/*.js',
+      './node_modules/fumadocs-ui/dist/**/*.js',
       './node_modules/fumadocs-openapi/dist/**/*.js',
     ],
     presets: [createPreset()],
@@ -484,7 +484,7 @@
 - Updated dependencies [b9fa99d]
 - Updated dependencies [a4bcaa7]
 - Updated dependencies [d1c7405]
-  - @maximai/fumadocs-ui@12.5.0
+  - fumadocs-ui@12.5.0
 
 ## 3.3.0
 
@@ -694,7 +694,7 @@
 
   `next-docs-zeta` -> `fumadocs-core`
 
-  `next-docs-ui` -> `@maximai/fumadocs-ui`
+  `next-docs-ui` -> `fumadocs-ui`
 
   `next-docs-mdx` -> `fumadocs-mdx`
 

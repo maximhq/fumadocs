@@ -9,7 +9,7 @@ Footer, and Breadcrumb.
 ## Usage
 
 ```tsx
-import { DocsPage, DocsBody } from '@maximai/fumadocs-ui/page';
+import { DocsPage, DocsBody } from 'fumadocs-ui/page';
 
 <DocsPage>
   <DocsBody>...</DocsBody>
@@ -23,7 +23,7 @@ It applies the [Typography](/docs/ui/theme#typography) styles, wrap your content
 > You can use this component without `<DocsPage />`.
 
 ```tsx
-import { DocsBody } from '@maximai/fumadocs-ui/page';
+import { DocsBody } from 'fumadocs-ui/page';
 
 <DocsBody>
   <h1>This heading looks good!</h1>
@@ -38,7 +38,7 @@ To extend the page to fill up all available space, pass `full` to the page compo
 This will force TOC to be shown as a popover.
 
 ```tsx
-import { DocsPage } from '@maximai/fumadocs-ui/page';
+import { DocsPage } from 'fumadocs-ui/page';
 
 <DocsPage full>...</DocsPage>;
 ```
@@ -52,7 +52,7 @@ documents, You can obtain it using the
 [TOC Utility](/docs/headless/utils/get-toc). Content sources like Fumadocs MDX offer this out-of-the-box.
 
 ```tsx
-import { DocsPage } from '@maximai/fumadocs-ui/page';
+import { DocsPage } from 'fumadocs-ui/page';
 
 <DocsPage toc={headings}>...</DocsPage>;
 ```
@@ -62,7 +62,7 @@ import { DocsPage } from '@maximai/fumadocs-ui/page';
 Customise or disable TOC from your documentation with the `tableOfContent` option.
 
 ```tsx
-import { DocsPage } from '@maximai/fumadocs-ui/page';
+import { DocsPage } from 'fumadocs-ui/page';
 
 <DocsPage tableOfContent={options}>...</DocsPage>;
 ```
@@ -80,7 +80,7 @@ On smaller devices, it is shown on a popover instead.
 Customise it with the `tableOfContentPopover` option.
 
 ```tsx
-import { DocsPage } from '@maximai/fumadocs-ui/page';
+import { DocsPage } from 'fumadocs-ui/page';
 
 <DocsPage tableOfContentPopover={options}>...</DocsPage>;
 ```
@@ -102,7 +102,7 @@ For Github hosted documents, you can use
 the [Git Last Modified](/docs/headless/utils/git-last-edit) utility.
 
 ```jsx
-import { DocsPage } from '@maximai/fumadocs-ui/page';
+import { DocsPage } from 'fumadocs-ui/page';
 
 <DocsPage lastUpdate={new Date(lastModifiedTime)} />;
 ```
@@ -114,7 +114,7 @@ Footer is a navigation element that has two buttons to jump to the next and prev
 Customise the footer with the `footer` option.
 
 ```tsx
-import { DocsPage, DocsBody } from '@maximai/fumadocs-ui/page';
+import { DocsPage, DocsBody } from 'fumadocs-ui/page';
 
 <DocsPage footer={options}>
   <DocsBody>...</DocsBody>
@@ -144,7 +144,7 @@ A navigation element, shown only when user is navigating in folders.
 In conjunction of Fumadocs MDX, you may create a `page.mdx` file and add the following.
 
 ```mdx
-export { withArticle as default } from '@maximai/fumadocs-ui/page';
+export { withArticle as default } from 'fumadocs-ui/page';
 
 ## Hello World
 ```
