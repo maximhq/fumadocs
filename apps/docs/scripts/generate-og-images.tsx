@@ -20,7 +20,7 @@ const modes: Mode[] = [
   },
   {
     param: 'ui',
-    package: '@maximai/fumadocs-ui',
+    package: 'fumadocs-ui',
     name: 'UI',
   },
   {

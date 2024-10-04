@@ -1,6 +1,6 @@
 'use client';
 
-import { Tab, Tabs } from '@maximai/fumadocs-ui/components/tabs';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import dynamic from 'next/dynamic';
 
 export * from './components';

@@ -10,7 +10,7 @@ export function isActive(
   pathname: string,
   nested = true,
 ): boolean {
-  return pathname.endsWith(url) || (nested && pathname.startsWith(`${url}/`));
+  return url === pathname || (nested && pathname.startsWith(`${url}/`));
 }
 
 export function replaceOrDefault(

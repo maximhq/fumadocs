@@ -1,8 +1,8 @@
-import { type DocsLayoutProps } from '@maximai/fumadocs-ui/layout';
+import { type DocsLayoutProps } from 'fumadocs-ui/layout';
 import { BookIcon, LayoutTemplateIcon } from 'lucide-react';
 import Image from 'next/image';
-import { RootToggle } from '@maximai/fumadocs-ui/components/layout/root-toggle';
-import type { HomeLayoutProps } from '@maximai/fumadocs-ui/home-layout';
+import { RootToggle } from 'fumadocs-ui/components/layout/root-toggle';
+import type { HomeLayoutProps } from 'fumadocs-ui/home-layout';
 import { FumadocsIcon, NavChildren } from '@/app/layout.client';
 import Logo from '@/public/logo.png';
 import { utils } from '@/utils/source';

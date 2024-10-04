@@ -5,15 +5,8 @@ import {
   type ReactNode,
 } from 'react';
 import { Check, Copy } from 'lucide-react';
-import {
-  Accordion,
-  Accordions,
-} from '@maximai/fumadocs-ui/components/accordion';
-import {
-  cn,
-  useCopyButton,
-  buttonVariants,
-} from '@maximai/fumadocs-ui/components/api';
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+import { cn, useCopyButton, buttonVariants } from 'fumadocs-ui/components/api';
 import { badgeVariants, getBadgeColor } from '@/ui/shared';
 import { ApiProvider, useApiContext } from '@/ui/contexts/api';
 

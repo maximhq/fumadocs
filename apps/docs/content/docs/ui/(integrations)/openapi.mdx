@@ -19,12 +19,12 @@ You must use it in conjunction with the [official Tailwind CSS plugin](/docs/ui/
 Add the package to `content` under your Tailwind CSS configuration.
 
 ```js title="tailwind.config.js"
-import { createPreset } from '@maximai/fumadocs-ui/tailwind-plugin';
+import { createPreset } from 'fumadocs-ui/tailwind-plugin';
 
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    './node_modules/@maximai/fumadocs-ui/dist/**/*.js',
+    './node_modules/fumadocs-ui/dist/**/*.js',
     './node_modules/fumadocs-openapi/dist/**/*.js',
   ],
   presets: [createPreset()],

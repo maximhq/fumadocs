@@ -105,7 +105,7 @@
 - 0a377a9: **Support writing code blocks as a `<Tab />` element.**
 
   ````mdx
-  import { Tabs } from '@maximai/fumadocs-ui/components/tabs';
+  import { Tabs } from 'fumadocs-ui/components/tabs';
 
   <Tabs items={["Tab 1", "Tab 2"]}>
 
@@ -395,15 +395,15 @@
 
 ### Major Changes
 
-- 321d1e1f: **Move Typescript integrations to `@maximai/fumadocs-typescript`**
+- 321d1e1f: **Move Typescript integrations to `fumadocs-typescript`**
 
   why: It is now a stable feature
 
-  migrate: Use `@maximai/fumadocs-typescript` instead.
+  migrate: Use `fumadocs-typescript` instead.
 
   ```diff
-  - import { AutoTypeTable } from "@maximai/fumadocs-ui/components/auto-type-table"
-  + import { AutoTypeTable } from "@maximai/fumadocs-typescript/ui"
+  - import { AutoTypeTable } from "fumadocs-ui/components/auto-type-table"
+  + import { AutoTypeTable } from "fumadocs-typescript/ui"
   ```
 
 ### Minor Changes
@@ -496,7 +496,7 @@
 
   `next-docs-zeta` -> `fumadocs-core`
 
-  `next-docs-ui` -> `@maximai/fumadocs-ui`
+  `next-docs-ui` -> `fumadocs-ui`
 
   `next-docs-mdx` -> `fumadocs-mdx`
 

@@ -3,7 +3,7 @@ title: Content Collections
 description: Use Content Collections for Fumadocs
 ---
 
-import { Callout } from '@maximai/fumadocs-ui/components/callout';
+import { Callout } from 'fumadocs-ui/components/callout';
 
 [Content Collections](https://www.content-collections.dev) is a library that transforms your content into type-safe data collections.
 
@@ -101,8 +101,8 @@ const docs = defineCollection({
 To use components from other packages like Fumadocs UI, pass them to your `<MDXContent />` component.
 
 ```tsx
-import defaultMdxComponents from '@maximai/fumadocs-ui/mdx';
-import { Callout } from '@maximai/fumadocs-ui/components/callout';
+import defaultMdxComponents from 'fumadocs-ui/mdx';
+import { Callout } from 'fumadocs-ui/components/callout';
 import { MDXContent } from '@content-collections/mdx/react';
 
 <MDXContent code="..." components={{ ...defaultMdxComponents, Callout }} />;

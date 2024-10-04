@@ -316,7 +316,7 @@
   Remove your `<LanguageSelect />` component from the layout. Enable the new language toggle with:
 
   ```tsx
-  import { DocsLayout } from '@maximai/fumadocs-ui/layout';
+  import { DocsLayout } from 'fumadocs-ui/layout';
 
   export default function Layout({ children }: { children: React.ReactNode }) {
     return <DocsLayout i18n>{children}</DocsLayout>;
@@ -466,7 +466,7 @@
 
 ### Patch Changes
 
-- 7b61b2f: Migrate `@maximai/fumadocs-ui` to fully ESM, adding support for ESM `tailwind.config` file
+- 7b61b2f: Migrate `fumadocs-ui` to fully ESM, adding support for ESM `tailwind.config` file
 - Updated dependencies [7b61b2f]
   - fumadocs-core@11.0.4
 
@@ -617,15 +617,15 @@
 
 ### Major Changes
 
-- 321d1e1f: **Move Typescript integrations to `@maximai/fumadocs-typescript`**
+- 321d1e1f: **Move Typescript integrations to `fumadocs-typescript`**
 
   why: It is now a stable feature
 
-  migrate: Use `@maximai/fumadocs-typescript` instead.
+  migrate: Use `fumadocs-typescript` instead.
 
   ```diff
-  - import { AutoTypeTable } from "@maximai/fumadocs-ui/components/auto-type-table"
-  + import { AutoTypeTable } from "@maximai/fumadocs-typescript/ui"
+  - import { AutoTypeTable } from "fumadocs-ui/components/auto-type-table"
+  + import { AutoTypeTable } from "fumadocs-typescript/ui"
   ```
 
 ### Patch Changes
@@ -688,7 +688,7 @@
 ### Minor Changes
 
 - b0003d44: Add `purple` theme
-- 9bdb49dd: Add `Folder` export to `@maximai/fumadocs-ui/components/files`
+- 9bdb49dd: Add `Folder` export to `fumadocs-ui/components/files`
 - 99d66d2d: Rename `title` prop to `name` in `File` and `Folder` component
 
 ### Patch Changes
@@ -759,7 +759,7 @@
   migrate: Use `createPreset` instead
 
   ```js
-  const { createPreset } = require('@maximai/fumadocs-ui/tailwind-plugin');
+  const { createPreset } = require('fumadocs-ui/tailwind-plugin');
 
   /** @type {import('tailwindcss').Config} */
   module.exports = {
@@ -767,7 +767,7 @@
       './components/**/*.{ts,tsx}',
       './app/**/*.{ts,tsx}',
       './content/**/*.mdx',
-      './node_modules/@maximai/fumadocs-ui/dist/**/*.js',
+      './node_modules/fumadocs-ui/dist/**/*.js',
     ],
     presets: [createPreset()],
   };
@@ -780,7 +780,7 @@
   Before:
 
   ```tsx
-  import { CodeBlock, Pre } from '@maximai/fumadocs-ui/mdx/pre';
+  import { CodeBlock, Pre } from 'fumadocs-ui/mdx/pre';
 
   <Pre title={title} allowCopy {...props} />;
   ```
@@ -788,7 +788,7 @@
   After:
 
   ```tsx
-  import { CodeBlock, Pre } from '@maximai/fumadocs-ui/components/codeblock';
+  import { CodeBlock, Pre } from 'fumadocs-ui/components/codeblock';
 
   <CodeBlock title={title} allowCopy>
     <Pre {...props} />
@@ -802,21 +802,21 @@
   migrate:
 
   ```diff
-  - import { Card, Cards } from "@maximai/fumadocs-ui/mdx/card"
-  + import { Card, Cards } from "@maximai/fumadocs-ui/components/card"
+  - import { Card, Cards } from "fumadocs-ui/mdx/card"
+  + import { Card, Cards } from "fumadocs-ui/components/card"
 
-  - import { Heading } from "@maximai/fumadocs-ui/mdx/heading"
-  + import { Heading } from "@maximai/fumadocs-ui/components/heading"
+  - import { Heading } from "fumadocs-ui/mdx/heading"
+  + import { Heading } from "fumadocs-ui/components/heading"
 
-  - import { Codeblock, Pre } from "@maximai/fumadocs-ui/mdx/pre"
-  + import { Codeblock, Pre } from "@maximai/fumadocs-ui/components/codeblock"
+  - import { Codeblock, Pre } from "fumadocs-ui/mdx/pre"
+  + import { Codeblock, Pre } from "fumadocs-ui/components/codeblock"
   ```
 
 - 2b11c20: **Rename to Fumadocs**
 
   `next-docs-zeta` -> `fumadocs-core`
 
-  `next-docs-ui` -> `@maximai/fumadocs-ui`
+  `next-docs-ui` -> `fumadocs-ui`
 
   `next-docs-mdx` -> `fumadocs-mdx`
 
@@ -831,8 +831,8 @@
   migration: Use the Layout component for sharing the navbar across pages
 
   ```diff
-  - import { Nav } from "@maximai/fumadocs-ui/nav"
-  + import { Layout } from "@maximai/fumadocs-ui/layout"
+  - import { Nav } from "fumadocs-ui/nav"
+  + import { Layout } from "fumadocs-ui/layout"
   ```
 
 ### Minor Changes

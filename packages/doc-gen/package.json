@@ -27,8 +27,8 @@
     "types:check": "tsc --noEmit"
   },
   "dependencies": {
-    "@maximai/fumadocs-typescript": "workspace:^",
     "estree-util-value-to-estree": "^3.1.2",
+    "fumadocs-typescript": "workspace:^",
     "hast-util-to-estree": "^3.1.0",
     "npm-to-yarn": "^2.2.1",
     "unist-util-visit": "^5.0.0"

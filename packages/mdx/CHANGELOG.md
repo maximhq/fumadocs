@@ -156,7 +156,7 @@
 
 ### Patch Changes
 
-- 7b61b2f: Migrate `@maximai/fumadocs-ui` to fully ESM, adding support for ESM `tailwind.config` file
+- 7b61b2f: Migrate `fumadocs-ui` to fully ESM, adding support for ESM `tailwind.config` file
 - Updated dependencies [7b61b2f]
   - fumadocs-core@11.0.4
 
@@ -338,7 +338,7 @@
 
   `next-docs-zeta` -> `fumadocs-core`
 
-  `next-docs-ui` -> `@maximai/fumadocs-ui`
+  `next-docs-ui` -> `fumadocs-ui`
 
   `next-docs-mdx` -> `fumadocs-mdx`
 

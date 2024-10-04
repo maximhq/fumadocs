@@ -1,40 +1,33 @@
 import { HomeIcon } from 'lucide-react';
-import {
-  Accordion,
-  Accordions,
-} from '@maximai/fumadocs-ui/components/accordion';
-import { Callout } from '@maximai/fumadocs-ui/components/callout';
-import { File, Folder, Files } from '@maximai/fumadocs-ui/components/files';
-import { Step, Steps } from '@maximai/fumadocs-ui/components/steps';
-import { Tab, Tabs } from '@maximai/fumadocs-ui/components/tabs';
-import { TypeTable } from '@maximai/fumadocs-ui/components/type-table';
-import { Card } from '@maximai/fumadocs-ui/components/card';
-import { Heading } from '@maximai/fumadocs-ui/components/heading';
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { File, Folder, Files } from 'fumadocs-ui/components/files';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+import { Card } from 'fumadocs-ui/components/card';
+import { Heading } from 'fumadocs-ui/components/heading';
 import type { ReactNode } from 'react';
-import { RootToggle } from '@maximai/fumadocs-ui/components/layout/root-toggle';
+import { RootToggle } from 'fumadocs-ui/components/layout/root-toggle';
 import dynamic from 'next/dynamic';
 import BannerImage from '@/public/banner.png';
 import { modes } from '@/utils/modes';
 import { Wrapper } from './wrapper';
 
 const RollButton = dynamic(() =>
-  import('@maximai/fumadocs-ui/components/roll-button').then(
-    (m) => m.RollButton,
-  ),
+  import('fumadocs-ui/components/roll-button').then((m) => m.RollButton),
 );
 
 const Banner = dynamic(() =>
-  import('@maximai/fumadocs-ui/components/banner').then((m) => m.Banner),
+  import('fumadocs-ui/components/banner').then((m) => m.Banner),
 );
 
 const InlineTOC = dynamic(() =>
-  import('@maximai/fumadocs-ui/components/inline-toc').then(
-    (res) => res.InlineTOC,
-  ),
+  import('fumadocs-ui/components/inline-toc').then((res) => res.InlineTOC),
 );
 
 const ImageZoom = dynamic(() =>
-  import('@maximai/fumadocs-ui/components/image-zoom').then((m) => m.ImageZoom),
+  import('fumadocs-ui/components/image-zoom').then((m) => m.ImageZoom),
 );
 
 export default {

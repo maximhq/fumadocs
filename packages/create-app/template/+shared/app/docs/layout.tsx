@@ -1,4 +1,4 @@
-import { DocsLayout } from '@maximai/fumadocs-ui/layout';
+import { DocsLayout } from 'fumadocs-ui/layout';
 import type { ReactNode } from 'react';
 import { docsOptions } from '../layout.config';
 

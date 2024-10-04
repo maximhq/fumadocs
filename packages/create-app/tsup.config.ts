@@ -9,7 +9,7 @@ writeFileSync(
   './versions.json',
   JSON.stringify({
     'fumadocs-core': corePkg.version,
-    '@maximai/fumadocs-ui': uiPkg.version,
+    'fumadocs-ui': uiPkg.version,
     'fumadocs-mdx': mdxPkg.version,
     '@fumadocs/content-collections': contentCollectionsPkg.version,
   }),

@@ -8,7 +8,7 @@
 
 ### Patch Changes
 
-- @maximai/fumadocs-typescript@2.0.1
+- fumadocs-typescript@2.0.1
 
 ## 1.0.2
 
@@ -16,11 +16,11 @@
 
 - 8ef2b68: Bump deps
 - Updated dependencies [8ef2b68]
-  - @maximai/fumadocs-typescript@2.0.1
+  - fumadocs-typescript@2.0.1
 
 ## 1.0.1
 
 ### Patch Changes
 
 - Updated dependencies [f75287d]
-  - @maximai/fumadocs-typescript@2.0.0
+  - fumadocs-typescript@2.0.0

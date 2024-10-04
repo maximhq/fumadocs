@@ -1,8 +1,8 @@
 'use client';
 
 import algo from 'algoliasearch/lite';
-import type { SharedProps } from '@maximai/fumadocs-ui/components/dialog/search';
-import SearchDialog from '@maximai/fumadocs-ui/components/dialog/search-algolia';
+import type { SharedProps } from 'fumadocs-ui/components/dialog/search';
+import SearchDialog from 'fumadocs-ui/components/dialog/search-algolia';
 import { modes } from '@/utils/modes';
 import { useMode } from '@/app/layout.client';
 
