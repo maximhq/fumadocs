@@ -3,7 +3,7 @@ import 'fumadocs-ui/style.css';
 import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
 import { I18nProvider } from 'fumadocs-ui/i18n';
-import { pageTree } from '@/app/source';
+import { source } from '@/app/source';
 import { DocsLayout } from 'fumadocs-ui/layout';
 
 const inter = Inter({
@@ -22,26 +22,35 @@ export default function Layout({
       <body>
         <I18nProvider
           locale={lang}
-          translations={{
-            en: {
+          locales={[
+            {
               name: 'English',
+              locale: 'en',
             },
-            cn: {
+            {
               name: 'Chinese',
-              toc: '目錄',
-              search: '搜尋文檔',
-              lastUpdate: '最後更新於',
-              searchNoResult: '沒有結果',
-              previousPage: '上一頁',
-              nextPage: '下一頁',
+              locale: 'cn',
             },
-          }}
+          ]}
+          translations={
+            {
+              cn: {
+                toc: '目錄',
+                search: '搜尋文檔',
+                lastUpdate: '最後更新於',
+                searchNoResult: '沒有結果',
+                previousPage: '上一頁',
+                nextPage: '下一頁',
+                chooseLanguage: '選擇語言',
+              },
+            }[lang]
+          }
         >
           <RootProvider>
             <DocsLayout
-              tree={pageTree[lang]}
+              tree={source.pageTree[lang]}
               nav={{
-                title: lang === 'cn' ? '目錄' : 'My App',
+                title: lang === 'cn' ? '文檔' : 'My App',
                 url: `/${lang}`,
               }}
               i18n
