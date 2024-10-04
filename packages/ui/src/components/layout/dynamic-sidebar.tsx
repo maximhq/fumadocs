@@ -1,6 +1,7 @@
 'use client';
 import { type PointerEventHandler, useCallback, useRef, useState } from 'react';
 import { SidebarIcon } from 'lucide-react';
+import { useOnChange } from 'fumadocs-core/utils/use-on-change';
 import { Sidebar, type SidebarProps } from '@/components/layout/sidebar';
 import { cn } from '@/utils/cn';
 import { buttonVariants } from '@/theme/variants';
@@ -14,9 +15,12 @@ export function DynamicSidebar(props: SidebarProps): React.ReactElement {
 
   const onCollapse = useCallback(() => {
     setCollapsed((v) => !v);
+  }, [setCollapsed]);
+
+  useOnChange(collapsed, () => {
     setHover(false);
     closeTimeRef.current = Date.now() + 150;
-  }, [setCollapsed]);
+  });
 
   const onEnter: PointerEventHandler = useCallback((e) => {
     if (e.pointerType === 'touch' || closeTimeRef.current > Date.now()) return;
@@ -73,34 +77,15 @@ export function DynamicSidebar(props: SidebarProps): React.ReactElement {
           onPointerLeave: onLeave,
           'aria-hidden': Boolean(collapsed && !hover),
           className: cn(
-            'md:transition-[transform,margin]',
+            'md:transition-[transform,padding,width,margin]',
             collapsed && [
-              'md:top-1 md:mr-[-240px] md:h-[calc(100dvh-4px)] md:animate-sidebar-collapse md:rounded-xl md:border md:shadow-md xl:mr-[-260px]',
+              'md:top-1 md:me-fd-sidebar-offset md:h-[calc(100dvh-4px)] md:w-[var(--fd-sidebar-width)] md:animate-fd-sidebar-collapse md:rounded-xl md:border md:ps-0 md:shadow-md',
               hover
                 ? 'md:translate-x-1 rtl:md:-translate-x-1'
-                : 'md:-translate-x-full rtl:md:translate-x-full',
+                : 'md:translate-x-[calc(var(--fd-sidebar-width)*-1)] rtl:md:translate-x-[var(--fd-sidebar-width)]',
             ],
           ),
         }}
-        footer={
-          <>
-            {props.footer}
-            <button
-              type="button"
-              aria-label="Collapse Sidebar"
-              className={cn(
-                buttonVariants({
-                  color: 'ghost',
-                  size: 'icon',
-                  className: 'max-md:hidden',
-                }),
-              )}
-              onClick={onCollapse}
-            >
-              <SidebarIcon />
-            </button>
-          </>
-        }
       />
     </>
   );

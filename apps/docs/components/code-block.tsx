@@ -1,54 +1,39 @@
 import * as Base from 'fumadocs-ui/components/codeblock';
-import type { HTMLAttributes } from 'react';
-import { useMemo } from 'react';
-import { createHighlighter } from 'shiki';
+import { Fragment } from 'react';
+import { codeToHast } from 'shiki';
+import { toJsxRuntime, type Jsx } from 'hast-util-to-jsx-runtime';
+import { jsx, jsxs } from 'react/jsx-runtime';
 
-const highlighter = await createHighlighter({
-  langs: ['bash', 'ts', 'tsx'],
-  themes: ['github-light', 'github-dark'],
-});
-
-export type CodeBlockProps = HTMLAttributes<HTMLPreElement> & {
+export interface CodeBlockProps {
   code: string;
   wrapper?: Base.CodeBlockProps;
   lang: 'bash' | 'ts' | 'tsx';
-};
+}
 
-export function CodeBlock({
+export async function CodeBlock({
   code,
   lang,
   wrapper,
-  ...props
-}: CodeBlockProps): React.ReactElement {
-  const html = useMemo(
-    () =>
-      highlighter.codeToHtml(code, {
-        lang,
-        defaultColor: false,
-        themes: {
-          light: 'github-light',
-          dark: 'github-dark',
-        },
-        transformers: [
-          {
-            name: 'remove-pre',
-            root: (root) => {
-              if (root.children[0].type !== 'element') return;
+}: CodeBlockProps): Promise<React.ReactElement> {
+  const hast = await codeToHast(code, {
+    lang,
+    defaultColor: false,
+    themes: {
+      light: 'github-light',
+      dark: 'github-dark',
+    },
+  });
 
-              return {
-                type: 'root',
-                children: root.children[0].children,
-              };
-            },
-          },
-        ],
-      }),
-    [code, lang],
-  );
+  const rendered = toJsxRuntime(hast, {
+    jsx: jsx as Jsx,
+    jsxs: jsxs as Jsx,
+    Fragment,
+    development: false,
+    components: {
+      // @ts-expect-error -- JSX component
+      pre: Base.Pre,
+    },
+  });
 
-  return (
-    <Base.CodeBlock {...wrapper}>
-      <Base.Pre {...props} dangerouslySetInnerHTML={{ __html: html }} />
-    </Base.CodeBlock>
-  );
+  return <Base.CodeBlock {...wrapper}>{rendered}</Base.CodeBlock>;
 }

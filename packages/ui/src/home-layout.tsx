@@ -1,6 +1,5 @@
 import { replaceOrDefault } from '@/utils/shared';
-import type { BaseLayoutProps } from '@/layout';
-import { getLinks } from '@/layout.shared';
+import { getLinks, type BaseLayoutProps } from '@/layout.shared';
 
 declare const { Nav }: typeof import('./home-layout.client');
 
@@ -10,6 +9,7 @@ export function HomeLayout({
   nav = {},
   links = [],
   githubUrl,
+  i18n,
   children,
 }: BaseLayoutProps): React.ReactElement {
   const finalLinks = getLinks(links, githubUrl);
@@ -18,7 +18,7 @@ export function HomeLayout({
     <>
       {replaceOrDefault(
         nav,
-        <Nav items={finalLinks} {...nav}>
+        <Nav items={finalLinks} i18n={i18n} {...nav}>
           {nav.children}
         </Nav>,
       )}

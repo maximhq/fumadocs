@@ -59,16 +59,19 @@ export default function AlgoliaSearchDialog({
       search={search}
       onSearchChange={setSearch}
       results={query.data ?? []}
+      isLoading={query.isLoading}
       {...props}
       footer={
-        <>
-          {tags ? (
+        tags ? (
+          <>
             <TagsList tag={tag} onTagChange={setTag} items={tags}>
               {showAlgolia ? <AlgoliaTitle /> : null}
             </TagsList>
-          ) : null}
-          {props.footer}
-        </>
+            {props.footer}
+          </>
+        ) : (
+          props.footer
+        )
       }
     />
   );
@@ -79,7 +82,7 @@ function AlgoliaTitle(): React.ReactNode {
     <a
       href="https://algolia.com"
       rel="noreferrer noopener"
-      className="ms-auto text-xs text-muted-foreground"
+      className="ms-auto text-xs text-fd-muted-foreground"
     >
       Search powered by Algolia
     </a>

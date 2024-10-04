@@ -1,4 +1,4 @@
-import { type FileData } from '@/source/types';
+import { type MetaData, type PageData } from '@/source/types';
 import { parseFilePath, type FileInfo, normalizePath } from './path';
 import { Storage } from './file-system';
 
@@ -16,6 +16,11 @@ export interface VirtualFile {
    */
   path: string;
   type: 'page' | 'meta';
+
+  /**
+   * Specified Slugs for page
+   */
+  slugs?: string[];
   data: unknown;
 }
 
@@ -37,18 +42,17 @@ export function loadFiles(files: VirtualFile[], options: LoadOptions): Storage {
     const relativePath = normalizedPath.slice(rootDir.length);
 
     if (file.type === 'page') {
-      const parsedPath = parseFilePath(relativePath);
-      const slugs = options.getSlugs(parsedPath);
+      const slugs = file.slugs ?? options.getSlugs(parseFilePath(relativePath));
 
       storage.write(relativePath, file.type, {
         slugs,
-        data: file.data,
-      } as FileData['file']);
+        data: file.data as PageData,
+      });
     }
 
     if (file.type === 'meta') {
       storage.write(relativePath, file.type, {
-        data: file.data,
+        data: file.data as MetaData,
       });
     }
   }

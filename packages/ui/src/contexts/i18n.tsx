@@ -12,20 +12,19 @@ export interface Translations {
   nextPage: string;
   previousPage: string;
   chooseTheme: string;
+  editOnGithub: string;
 }
 
-export interface NamedTranslation extends Partial<Translations> {
-  /**
-   * The name of translation
-   */
+export interface LocaleItem {
   name: string;
+  locale: string;
 }
 
 interface I18nContextType {
   locale?: string;
   onChange?: (v: string) => void;
   text: Translations;
-  translations?: Record<string, NamedTranslation>;
+  locales?: LocaleItem[];
 }
 
 export const I18nContext = createContext<I18nContextType>({
@@ -39,6 +38,7 @@ export const I18nContext = createContext<I18nContextType>({
     nextPage: 'Next',
     previousPage: 'Previous',
     chooseTheme: 'Theme',
+    editOnGithub: 'Edit on GitHub',
   },
 });
 

@@ -85,7 +85,7 @@ Specify an icon name for folder with the `icon` property, see [Icons](#icons).
 
 Control the order of items.
 
-When a meta file presents, items are not included unless you have explicitly added them to `pages`.
+When a meta file is present, items are not included unless you have explicitly added them to `pages`.
 
 ```json
 {
@@ -181,11 +181,20 @@ Use the syntax `[Text](url)` to insert links.
 }
 ```
 
+You can add an icon too.
+
+```json
+{
+  "title": "Folder",
+  "pages": ["index", "[Triangle][Vercel](https://vercel.com)"]
+}
+```
+
 ## Icons
 
-Since Fumadocs doesn't include a icon library, you have to convert the icon names to JSX elements so that it can be rendered as a component.
+Since Fumadocs doesn't include an icon library, you have to convert the icon names to JSX elements so that it can be rendered as a component.
 
-For built-in content sources like Fumadocs MDX, you can [the `icon` handler](/docs/headless/source-api#icons) from Source API.
+For built-in content sources like Fumadocs MDX, you can use [the `icon` handler](/docs/headless/source-api#icons) from Source API.
 
 ## Multiple Page Trees
 
@@ -198,13 +207,13 @@ Adding a `root` property in meta file can mark your folder as a **root**.
 }
 ```
 
-When users are browsing the pages under a root folder, only the child items of the folder will be visible.
+When the user is browsing a page under a root folder, only the child items of the folder will be visible.
 
-For example, when you are in a root folder called `core`, the other folders (e.g. `ui`) are not shown on the sidebar and other navigation elements.
+For example, when you are in a root folder called `core`, the other folders (e.g. `ui`) are not shown on the sidebar (and other navigation elements).
 
 <Files>
   <Folder name="core" defaultOpen>
-    <File name="Current Page" className="!text-primary !bg-primary/10" />
+    <File name="Current Page" className="!text-fd-primary !bg-fd-primary/10" />
     <File name="Other Pages" />
   </Folder>
   <Folder name="ui" className="opacity-50" disabled defaultOpen>
@@ -214,6 +223,8 @@ For example, when you are in a root folder called `core`, the other folders (e.g
 
 To allow users switching between different roots, implement a component that navigates to a page under the root folders.
 On Fumadocs UI, this is available via the [Root Toggle](/docs/ui/components/root-toggle) component.
+
+> By default, index pages are not considered as the pages "under" a folder, you must specify them in the `pages` property.
 
 ## Internationalization
 

@@ -1,5 +1,106 @@
 # next-docs-mdx
 
+## 10.0.2
+
+### Patch Changes
+
+- f21c871: Change cache path of manifest files
+- Updated dependencies [78e59e7]
+  - fumadocs-core@13.4.8
+
+## 10.0.1
+
+### Patch Changes
+
+- 7e23388: Fix windows compatibility
+  - fumadocs-core@13.4.5
+
+## 10.0.0
+
+### Major Changes
+
+- ed83d01: **Support declarative collections**
+
+  **why:** This allows Fumadocs MDX to be more flexible.
+
+  **migrate:**
+
+  You don't need `exports` anymore, properties are merged into one object by default.
+
+  ```diff
+  - page.data.exports.toc
+  + page.data.toc
+
+  - page.data.exports.default
+  + page.data.body
+  ```
+
+  A `source.config.ts` is now required.
+
+  ```ts
+  import { defineDocs, defineConfig } from 'fumadocs-mdx/config';
+
+  export const { docs, meta } = defineDocs();
+
+  export default defineConfig();
+  ```
+
+  The `mdx-components.tsx` file is no longer used, pass MDX components to body instead.
+
+  Search indexes API is now replaced by Manifest API.
+
+  Please refer to the docs for further details.
+
+### Patch Changes
+
+- 0c251e5: Bump deps
+- Updated dependencies [7dabbc1]
+- Updated dependencies [0c251e5]
+- Updated dependencies [3b56170]
+  - fumadocs-core@13.4.2
+
+## 9.0.4
+
+### Patch Changes
+
+- 95dbba1: Support passing remark structure options
+- Updated dependencies [95dbba1]
+  - fumadocs-core@13.4.1
+
+## 9.0.3
+
+### Patch Changes
+
+- c0d1faf: Store additional `_data` to search indexes
+  - fumadocs-core@13.4.0
+
+## 9.0.2
+
+### Patch Changes
+
+- 61b91fa: Improve Fumadocs OpenAPI support
+- Updated dependencies [36b771b]
+- Updated dependencies [61b91fa]
+  - fumadocs-core@13.2.2
+
+## 9.0.1
+
+### Patch Changes
+
+- c7aa090: Improve Fumadocs OpenAPI support
+- Updated dependencies [17fa173]
+  - fumadocs-core@13.2.1
+
+## 9.0.0
+
+### Major Changes
+
+- 1f1989e: Support Fumadocs v13
+
+### Patch Changes
+
+- fumadocs-core@13.0.1
+
 ## 8.2.34
 
 ### Patch Changes

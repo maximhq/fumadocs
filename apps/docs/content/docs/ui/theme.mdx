@@ -4,6 +4,8 @@ description: Add Theme to Fumadocs UI
 icon: Palette
 ---
 
+import { WidthTrigger } from './theme';
+
 ## Usage
 
 You can import the pre-built stylesheet.
@@ -24,6 +26,10 @@ For Tailwind CSS projects, use the official Tailwind CSS plugin.
   }
 }
 ```
+
+<Callout type="warn" title="ESM-Only">
+  Use ESM syntax on your configuration file.
+</Callout>
 
 ### Global Styles
 
@@ -52,6 +58,18 @@ import { RootProvider } from '@fumadocs-ui/provider';
 
 <RootProvider dir="rtl"></RootProvider>;
 ```
+
+### Layout Width
+
+Customise the max width of docs layout with CSS Variables.
+
+```css
+:root {
+  --fd-layout-width: 1400px;
+}
+```
+
+<WidthTrigger />
 
 ## Themes
 
@@ -105,4 +123,41 @@ The Tailwind CSS plugin overrides the default configuration for the Typography p
 
 ```tsx
 <div className="prose">...</div>
+```
+
+### Colors
+
+Fumadocs UI has its own colors, animations, and utilities.
+It adds the colors with a `fd-` prefix, you can reference them with the prefix like `bg-fd-background`.
+
+To remove the prefix, enable `addGlobalColors`.
+
+```js
+import { createPreset } from 'fumadocs-ui/tailwind-plugin';
+
+/** @type {import('tailwindcss').Config} */
+export default {
+  presets: [
+    createPreset({
+      addGlobalColors: true,
+    }),
+  ],
+};
+```
+
+### Layout Width
+
+Customise the max width of docs layout with Tailwind CSS plugin.
+
+```js
+import { createPreset } from 'fumadocs-ui/tailwind-plugin';
+
+/** @type {import('tailwindcss').Config} */
+export default {
+  presets: [
+    createPreset({
+      layoutWidth: '1400px',
+    }),
+  ],
+};
 ```

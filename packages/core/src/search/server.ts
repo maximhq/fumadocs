@@ -1,10 +1,18 @@
 import { Document } from 'flexsearch';
-import { type NextRequest, NextResponse } from 'next/server';
+import { type NextRequest } from 'next/server';
 import type { StructuredData } from '@/mdx-plugins/remark-structure';
-import type { SortedResult } from './shared';
+import type { SortedResult } from '@/server/types';
+import { createEndpoint } from '@/search/create-endpoint';
 
-interface SearchAPI {
-  GET: (request: NextRequest) => Promise<NextResponse<SortedResult[]>>;
+export interface SearchServer {
+  search: (
+    query: string,
+    options?: { locale?: string; tag?: string },
+  ) => Promise<SortedResult[]>;
+}
+
+export interface SearchAPI extends SearchServer {
+  GET: (request: NextRequest) => Promise<Response>;
 
   search: (
     query: string,
@@ -15,15 +23,16 @@ interface SearchAPI {
 /**
  * Resolve indexes dynamically
  */
-type Dynamic<T> = () => T[] | Promise<T[]>;
+export type Dynamic<T> = () => T[] | Promise<T[]>;
 
-interface SimpleOptions {
+export interface SimpleOptions {
   indexes: Index[] | Dynamic<Index>;
   language?: string;
 }
 
-interface AdvancedOptions {
+export interface AdvancedOptions {
   indexes: AdvancedIndex[] | Dynamic<AdvancedIndex>;
+
   /**
    * Enable search tags for filtering results
    *
@@ -33,88 +42,29 @@ interface AdvancedOptions {
   language?: string;
 }
 
-type ToI18n<T extends { indexes: unknown }> = Omit<
-  T,
-  'indexes' | 'language'
-> & {
-  indexes: (
-    | [language: string, indexes: T['indexes']]
-    | {
-        language: string;
-        indexes: T['indexes'];
-      }
-  )[];
-};
-
-function create(search: SearchAPI['search']): SearchAPI {
-  return {
-    search,
-    async GET(request) {
-      const query = request.nextUrl.searchParams.get('query');
-      if (!query) return NextResponse.json([]);
-
-      return NextResponse.json(
-        await search(query, {
-          tag: request.nextUrl.searchParams.get('tag') ?? undefined,
-          locale: request.nextUrl.searchParams.get('locale') ?? undefined,
-        }),
-      );
-    },
-  };
-}
-
 export function createSearchAPI<T extends 'simple' | 'advanced'>(
   type: T,
   options: T extends 'simple' ? SimpleOptions : AdvancedOptions,
 ): SearchAPI {
   if (type === 'simple') {
-    return initSearchAPI(options as SimpleOptions);
+    return createEndpoint(initSimpleSearch(options as SimpleOptions));
   }
 
-  return initSearchAPIAdvanced(options as AdvancedOptions);
-}
-
-export function createI18nSearchAPI<T extends 'simple' | 'advanced'>(
-  type: T,
-  options: T extends 'simple' ? ToI18n<SimpleOptions> : ToI18n<AdvancedOptions>,
-): SearchAPI {
-  const map = new Map<string, SearchAPI>();
-
-  for (const entry of options.indexes) {
-    const v = Array.isArray(entry)
-      ? { language: entry[0], indexes: entry[1] }
-      : entry;
-
-    map.set(
-      v.language,
-      // @ts-expect-error -- Index depends on generic types
-      createSearchAPI(type, {
-        ...options,
-        language: v.language,
-        indexes: v.indexes,
-      }),
-    );
-  }
-
-  return create(async (query, searchOptions) => {
-    if (searchOptions?.locale) {
-      const handler = map.get(searchOptions.locale);
-
-      if (handler) return handler.search(query, searchOptions);
-    }
-
-    return [];
-  });
+  return createEndpoint(initAdvancedSearch(options as AdvancedOptions));
 }
 
 export interface Index {
   title: string;
+  description?: string;
   content: string;
   url: string;
   keywords?: string;
 }
 
-export function initSearchAPI({ indexes, language }: SimpleOptions): SearchAPI {
+export function initSimpleSearch({
+  indexes,
+  language,
+}: SimpleOptions): SearchServer {
   const store = ['title', 'url'];
 
   async function getDocument(): Promise<Document<Index, string[]>> {
@@ -131,6 +81,14 @@ export function initSearchAPI({ indexes, language }: SimpleOptions): SearchAPI {
             field: 'title',
             tokenize: 'forward',
             resolution: 9,
+          },
+          {
+            field: 'description',
+            tokenize: 'strict',
+            context: {
+              depth: 1,
+              resolution: 9,
+            },
           },
           {
             field: 'content',
@@ -152,6 +110,7 @@ export function initSearchAPI({ indexes, language }: SimpleOptions): SearchAPI {
     for (const page of items) {
       index.add({
         title: page.title,
+        description: page.description,
         url: page.url,
         content: page.content,
         keywords: page.keywords,
@@ -161,30 +120,34 @@ export function initSearchAPI({ indexes, language }: SimpleOptions): SearchAPI {
   }
 
   const doc = getDocument();
-  return create(async (query) => {
-    const results = (await doc).search(query, 5, {
-      enrich: true,
-      suggest: true,
-    });
+  return {
+    search: async (query) => {
+      const results = (await doc).search(query, 5, {
+        enrich: true,
+        suggest: true,
+      });
 
-    if (results.length === 0) return [];
+      if (results.length === 0) return [];
 
-    return results[0].result.map<SortedResult>((page) => ({
-      type: 'page',
-      content: page.doc.title,
-      id: page.doc.url,
-      url: page.doc.url,
-    }));
-  });
+      return results[0].result.map<SortedResult>((page) => ({
+        type: 'page',
+        content: page.doc.title,
+        id: page.doc.url,
+        url: page.doc.url,
+      }));
+    },
+  };
 }
 
 export interface AdvancedIndex {
   id: string;
   title: string;
+  description?: string;
+
   keywords?: string;
 
   /**
-   * Required if `tag` is enabled
+   * Required if tag filter is enabled
    */
   tag?: string;
   /**
@@ -205,11 +168,11 @@ interface InternalIndex {
   keywords?: string;
 }
 
-export function initSearchAPIAdvanced({
+export function initAdvancedSearch({
   indexes,
   language,
   tag = false,
-}: AdvancedOptions): SearchAPI {
+}: AdvancedOptions): SearchServer {
   const store = ['id', 'url', 'content', 'page_id', 'type', 'keywords'];
 
   async function getDocument(): Promise<Document<InternalIndex, string[]>> {
@@ -251,6 +214,17 @@ export function initSearchAPIAdvanced({
         url: page.url,
       });
 
+      if (page.description) {
+        index.add({
+          id: page.id + (id++).toString(),
+          page_id: page.id,
+          tag: page.tag,
+          type: 'text',
+          url: page.url,
+          content: page.description,
+        });
+      }
+
       for (const heading of data.headings) {
         index.add({
           id: page.id + (id++).toString(),
@@ -279,56 +253,62 @@ export function initSearchAPIAdvanced({
 
   const doc = getDocument();
 
-  return create(async (query, options) => {
-    const index = await doc;
-    const results = index.search(query, 5, {
-      enrich: true,
-      tag: options?.tag,
-      limit: 6,
-    });
+  return {
+    search: async (query, options) => {
+      const index = await doc;
+      const results = index.search(query, 5, {
+        enrich: true,
+        tag: options?.tag,
+        limit: 6,
+      });
 
-    const map = new Map<string, SortedResult[]>();
+      const map = new Map<string, SortedResult[]>();
 
-    for (const item of results[0]?.result ?? []) {
-      if (item.doc.type === 'page') {
-        if (!map.has(item.doc.id)) {
-          map.set(item.doc.id, []);
+      for (const item of results[0]?.result ?? []) {
+        if (item.doc.type === 'page') {
+          if (!map.has(item.doc.id)) {
+            map.set(item.doc.id, []);
+          }
+
+          continue;
         }
 
-        continue;
+        const list = map.get(item.doc.page_id) ?? [];
+
+        list.push({
+          id: item.doc.id,
+          content: item.doc.content,
+          type: item.doc.type,
+          url: item.doc.url,
+        });
+
+        map.set(item.doc.page_id, list);
       }
 
-      const list = map.get(item.doc.page_id) ?? [];
+      const sortedResult: SortedResult[] = [];
+      for (const [id, items] of map.entries()) {
+        const page = (
+          index as unknown as {
+            get: (id: string) => InternalIndex | null;
+          }
+        ).get(id);
 
-      list.push({
-        id: item.doc.id,
-        content: item.doc.content,
-        type: item.doc.type,
-        url: item.doc.url,
-      });
+        if (!page) continue;
 
-      map.set(item.doc.page_id, list);
-    }
+        sortedResult.push({
+          id: page.id,
+          content: page.content,
+          type: 'page',
+          url: page.url,
+        });
+        sortedResult.push(...items);
+      }
 
-    const sortedResult: SortedResult[] = [];
-    for (const [id, items] of map.entries()) {
-      const page = (
-        index as unknown as {
-          get: (id: string) => InternalIndex | null;
-        }
-      ).get(id);
-
-      if (!page) continue;
-
-      sortedResult.push({
-        id: page.id,
-        content: page.content,
-        type: 'page',
-        url: page.url,
-      });
-      sortedResult.push(...items);
-    }
-
-    return sortedResult;
-  });
+      return sortedResult;
+    },
+  };
 }
+
+// TODO: Use new i18n API (major)
+export { createI18nSearchAPI as createI18nSearchAPIExperimental } from './i18n-api';
+export { createI18nSearchAPI } from './legacy-i18n-api';

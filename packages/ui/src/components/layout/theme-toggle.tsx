@@ -4,12 +4,12 @@ import { useTheme } from 'next-themes';
 import { useCallback, type ButtonHTMLAttributes } from 'react';
 import { cn } from '@/utils/cn';
 
-const buttonVariants = cva('size-7 rounded-full p-1.5 text-muted-foreground', {
+const buttonVariants = cva('size-6 rounded-full p-1 text-fd-muted-foreground', {
   variants: {
     dark: {
-      true: 'dark:bg-accent dark:text-accent-foreground',
+      true: 'dark:bg-fd-accent dark:text-fd-accent-foreground',
       false:
-        'bg-accent text-accent-foreground dark:bg-transparent dark:text-muted-foreground',
+        'bg-fd-accent text-fd-accent-foreground dark:bg-transparent dark:text-fd-muted-foreground',
     },
   },
 });

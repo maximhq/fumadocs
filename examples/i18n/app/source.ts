@@ -1,12 +1,10 @@
-import { map } from '@/.map';
 import { createMDXSource } from 'fumadocs-mdx';
 import { loader } from 'fumadocs-core/source';
-import { defaultLanguage, languages } from '@/i18n';
+import { i18n } from '@/i18n';
+import { docs, meta } from '@/.source';
 
-export const { getPage, getPages, getLanguages, pageTree } = loader({
+export const source = loader({
   baseUrl: '/',
-  rootDir: 'docs',
-  languages,
-  source: createMDXSource(map),
-  defaultLanguage,
+  source: createMDXSource(docs, meta),
+  i18n,
 });

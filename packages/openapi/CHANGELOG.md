@@ -1,5 +1,417 @@
 # @fuma-docs/openapi
 
+## 5.4.14
+
+### Patch Changes
+
+- Updated dependencies [6231ad3]
+- Updated dependencies [4cb74d5]
+  - fumadocs-core@13.4.10
+  - fumadocs-ui@13.4.10
+
+## 5.4.13
+
+### Patch Changes
+
+- Updated dependencies [083f04a]
+- Updated dependencies [bcf51a6]
+  - fumadocs-core@13.4.9
+  - fumadocs-ui@13.4.9
+
+## 5.4.12
+
+### Patch Changes
+
+- Updated dependencies [5581733]
+- Updated dependencies [78e59e7]
+- Updated dependencies [1a327cc]
+  - fumadocs-ui@13.4.8
+  - fumadocs-core@13.4.8
+
+## 5.4.11
+
+### Patch Changes
+
+- Updated dependencies [6e1923e]
+- Updated dependencies [6e1923e]
+- Updated dependencies [6e1923e]
+  - fumadocs-core@13.4.7
+  - fumadocs-ui@13.4.7
+
+## 5.4.10
+
+### Patch Changes
+
+- Updated dependencies [b33aff0]
+- Updated dependencies [afb697e]
+- Updated dependencies [6bcd263]
+- Updated dependencies [daa66d2]
+  - fumadocs-ui@13.4.6
+  - fumadocs-core@13.4.6
+
+## 5.4.9
+
+### Patch Changes
+
+- 5bca46f: Support removing all code samples
+- Updated dependencies [d46a3f1]
+  - fumadocs-ui@13.4.5
+  - fumadocs-core@13.4.5
+
+## 5.4.8
+
+### Patch Changes
+
+- Updated dependencies [729928e]
+  - fumadocs-core@13.4.4
+  - fumadocs-ui@13.4.4
+
+## 5.4.7
+
+### Patch Changes
+
+- fumadocs-core@13.4.3
+- fumadocs-ui@13.4.3
+
+## 5.4.6
+
+### Patch Changes
+
+- 0cff470: Enable group id on tabs by default
+- 0c251e5: Bump deps
+- Updated dependencies [7dabbc1]
+- Updated dependencies [0c251e5]
+- Updated dependencies [3b56170]
+- Updated dependencies [0c251e5]
+- Updated dependencies [0c251e5]
+  - fumadocs-core@13.4.2
+  - fumadocs-ui@13.4.2
+
+## 5.4.5
+
+### Patch Changes
+
+- Updated dependencies [95dbba1]
+  - fumadocs-core@13.4.1
+  - fumadocs-ui@13.4.1
+
+## 5.4.4
+
+### Patch Changes
+
+- Updated dependencies [26f5360]
+  - fumadocs-ui@13.4.0
+  - fumadocs-core@13.4.0
+
+## 5.4.3
+
+### Patch Changes
+
+- Updated dependencies [f8cc167]
+  - fumadocs-core@13.3.3
+  - fumadocs-ui@13.3.3
+
+## 5.4.2
+
+### Patch Changes
+
+- 3d1ec96: Improve schema fields margins
+
+## 5.4.1
+
+### Patch Changes
+
+- 029a156: Fix `display` on property components
+- eb922e1: Support adding `description` to generated document body
+
+## 5.4.0
+
+### Minor Changes
+
+- 6cf5535: Persist `authorization` field
+
+## 5.3.2
+
+### Patch Changes
+
+- 0b93a31: Support `required` in `allOf` schemas
+
+## 5.3.1
+
+### Patch Changes
+
+- 5660e1e: Fix `allOf` schema display problem
+- 28bb673: Fix fields styles
+
+## 5.3.0
+
+### Minor Changes
+
+- 3fa2436: Support Python code sample
+
+### Patch Changes
+
+- 3e4627a: Show required label on body parameters
+- 10f6f39: Fix common parameters
+- Updated dependencies [17746a6]
+- Updated dependencies [0e0ef8c]
+  - fumadocs-ui@13.3.2
+  - fumadocs-core@13.3.2
+
+## 5.2.2
+
+### Patch Changes
+
+- Updated dependencies [7258c4b]
+  - fumadocs-ui@13.3.1
+  - fumadocs-core@13.3.1
+
+## 5.2.1
+
+### Patch Changes
+
+- 81d0887: Support disabling code sample with undefined source
+- Updated dependencies [8f5b19e]
+- Updated dependencies [4916f84]
+- Updated dependencies [fd46eb6]
+- Updated dependencies [fd46eb6]
+- Updated dependencies [fd46eb6]
+- Updated dependencies [fd46eb6]
+- Updated dependencies [32ca37a]
+- Updated dependencies [9aae448]
+- Updated dependencies [c542561]
+  - fumadocs-ui@13.3.0
+  - fumadocs-core@13.3.0
+
+## 5.2.0
+
+### Minor Changes
+
+- 70172f1: Change default value of `per` to `operation`
+
+### Patch Changes
+
+- 61b91fa: Improve Fumadocs OpenAPI support
+- Updated dependencies [36b771b]
+- Updated dependencies [61b91fa]
+  - fumadocs-core@13.2.2
+  - fumadocs-ui@13.2.2
+
+## 5.1.0
+
+### Minor Changes
+
+- c7aa090: Generate `document` field on output MDX files
+
+### Patch Changes
+
+- Updated dependencies [17fa173]
+  - fumadocs-core@13.2.1
+  - fumadocs-ui@13.2.1
+
+## 5.0.3
+
+### Patch Changes
+
+- 96c9dda: Change Heading scroll margins
+- c094fef: Fix compatibility issues on other content sources
+- Updated dependencies [96c9dda]
+- Updated dependencies [ba588a2]
+- Updated dependencies [96c9dda]
+- Updated dependencies [ec983a3]
+  - fumadocs-core@13.2.0
+  - fumadocs-ui@13.2.0
+
+## 5.0.2
+
+### Patch Changes
+
+- 22549cd: Add authorization properties to examples
+
+## 5.0.1
+
+### Patch Changes
+
+- 444af27: Fix self-referencing schema types
+- 90af678: Reduce initial loaded bundle size
+
+## 5.0.0
+
+### Major Changes
+
+- 971817c: **Migrate to React Server Component**
+
+  The API reference page is now a server component.
+  The MDX generator will only generate a small MDX file, and the rest will be handled by our `APIPage` component.
+
+  ```mdx
+  ---
+  title: Delete Api
+  full: true
+  method: POST
+  route: /v1/apis.deleteApi
+  ---
+
+  <APIPage
+    operations={[{ path: '/v1/apis.deleteApi', method: 'post' }]}
+    hasHead={false}
+  />
+  ```
+
+  - Markdown/MDX content is still supported, but will be processed in the server component (during runtime) instead.
+  - Your Remark/Rehype plugins (e.g. Rehype Code) configured in Fumadocs MDX or other source providers, will **not** be shared. Fumadocs OpenAPI uses a separate MDX processor instance.
+  - `APIPage` component will fetch the OpenAPI Schema when being rendered. **On Vercel**, if it relies on the file system, ensure the page **will not** be re-rendered after build.
+
+  Please refer to documentation for the new usage.
+
+### Minor Changes
+
+- 480d211: Change output path logic
+- 4bf9851: Support to group pages by tags
+- 3874ab5: Support Go Sample Request
+- 3874ab5: Replace Response Table of Tabs
+
+### Patch Changes
+
+- 4bf9851: Improve Curl example generator
+- Updated dependencies [f280191]
+- Updated dependencies [61ef42c]
+- Updated dependencies [deae4dd]
+- Updated dependencies [c8910c4]
+- Updated dependencies [c8910c4]
+- Updated dependencies [6c42960]
+  - fumadocs-core@13.1.0
+  - fumadocs-ui@13.1.0
+
+## 4.4.2
+
+### Patch Changes
+
+- Updated dependencies [37bbfff]
+- Updated dependencies [e7c52f2]
+  - fumadocs-core@13.0.7
+  - fumadocs-ui@13.0.7
+
+## 4.4.1
+
+### Patch Changes
+
+- Updated dependencies [1622e36]
+  - fumadocs-ui@13.0.6
+  - fumadocs-core@13.0.6
+
+## 4.4.0
+
+### Minor Changes
+
+- b109e44: Improve generated sample requests
+
+### Patch Changes
+
+- Updated dependencies [2cf65f6]
+  - fumadocs-core@13.0.5
+  - fumadocs-ui@13.0.5
+
+## 4.3.1
+
+### Patch Changes
+
+- d987912: Show current request pathname in Playground
+- 0146572: Fix empty params
+
+## 4.3.0
+
+### Minor Changes
+
+- 5acebdd: Support grouping output by folders (per operation)
+- 744bd24: Support accessing context information on custom frontmatter
+- 6bb9d2d: Support integration with Fumadocs Source API
+
+### Patch Changes
+
+- 744bd24: Fix generate files on `operation` mode
+- Updated dependencies [5355391]
+  - fumadocs-core@13.0.4
+  - fumadocs-ui@13.0.4
+
+## 4.2.2
+
+### Patch Changes
+
+- Updated dependencies [978342f]
+  - fumadocs-core@13.0.3
+  - fumadocs-ui@13.0.3
+
+## 4.2.1
+
+### Patch Changes
+
+- Updated dependencies [4819820]
+  - fumadocs-core@13.0.2
+  - fumadocs-ui@13.0.2
+
+## 4.2.0
+
+### Minor Changes
+
+- dfcc61f: Implement multipart form data
+
+### Patch Changes
+
+- f2b540a: Fix `fetch` problems on API Playground
+
+## 4.1.1
+
+### Patch Changes
+
+- fumadocs-core@13.0.1
+- fumadocs-ui@13.0.1
+
+## 4.1.0
+
+### Minor Changes
+
+- abf84bb: Support to customise/disable TypeScript Response generation
+- 40728a1: Support custom fields (auth, query, header, path and body)
+
+### Patch Changes
+
+- Updated dependencies [89190ae]
+- Updated dependencies [b02eebf]
+- Updated dependencies [09c3103]
+- Updated dependencies [f868018]
+- Updated dependencies [8aebeab]
+- Updated dependencies [c684c00]
+- Updated dependencies [8aebeab]
+- Updated dependencies [0377bb4]
+- Updated dependencies [e8e6a17]
+- Updated dependencies [c8964d3]
+- Updated dependencies [c901e6b]
+- Updated dependencies [daa7d3c]
+- Updated dependencies [c714eaa]
+- Updated dependencies [89190ae]
+- Updated dependencies [b02eebf]
+- Updated dependencies [b02eebf]
+- Updated dependencies [4373231]
+  - fumadocs-ui@13.0.0
+  - fumadocs-core@13.0.0
+
+## 4.0.6
+
+### Patch Changes
+
+- Updated dependencies [a332bee]
+  - fumadocs-ui@12.5.6
+  - fumadocs-core@12.5.6
+
+## 4.0.5
+
+### Patch Changes
+
+- Updated dependencies [3519e6c]
+  - fumadocs-ui@12.5.5
+  - fumadocs-core@12.5.5
+
 ## 4.0.4
 
 ### Patch Changes

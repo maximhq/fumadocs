@@ -19,6 +19,13 @@ export interface SharedNavProps extends TitleProps, NavBoxProps {
 
 export interface BaseLayoutProps {
   /**
+   * Enable Language Switch
+   *
+   * @defaultValue false
+   */
+  i18n?: boolean;
+
+  /**
    * GitHub url
    */
   githubUrl?: string;
@@ -42,7 +49,7 @@ export function getLinks(
     result = [
       ...result,
       {
-        type: 'secondary',
+        type: 'icon',
         url: githubUrl,
         text: 'Github',
         icon: (

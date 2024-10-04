@@ -33,7 +33,7 @@ export interface SidebarProps {
    * Open folders by default if their level is lower or equal to a specific level
    * (Starting from 1)
    *
-   * @defaultValue 1
+   * @defaultValue 0
    */
   defaultOpenLevel?: number;
 
@@ -53,6 +53,13 @@ export interface SidebarProps {
 
   footer?: React.ReactNode;
   footerProps?: HTMLAttributes<HTMLDivElement>;
+
+  /**
+   * Hide search trigger
+   *
+   * @defaultValue false
+   */
+  hideSearch?: boolean;
 }
 
 interface InternalContext {
@@ -74,14 +81,14 @@ const defaultComponents: Components = {
 };
 
 const Context = createContext<InternalContext>({
-  defaultOpenLevel: 1,
+  defaultOpenLevel: 0,
   components: defaultComponents,
   prefetch: true,
 });
 
 export function Sidebar({
   components,
-  defaultOpenLevel = 1,
+  defaultOpenLevel = 0,
   items,
   prefetch = true,
   ...props
@@ -89,6 +96,7 @@ export function Sidebar({
   aside?: HTMLAttributes<HTMLElement> & Record<string, unknown>;
 }): React.ReactElement {
   const search = useSearchContext();
+  const hasSearch = search.enabled && !props.hideSearch;
   const context = useMemo<InternalContext>(
     () => ({
       defaultOpenLevel,
@@ -105,50 +113,46 @@ export function Sidebar({
         blockScrollingWidth={768} // md
         {...props.aside}
         className={cn(
-          'fixed z-30 flex shrink-0 flex-col bg-card text-sm md:sticky md:top-0 md:h-dvh md:w-[240px] md:border-e xl:w-[260px]',
-          'max-md:inset-0 max-md:bg-background/80 max-md:pt-14 max-md:text-[15px] max-md:backdrop-blur-md max-md:data-[open=false]:hidden',
+          'fixed z-30 flex flex-col bg-fd-card text-sm md:sticky md:top-0 md:h-dvh md:w-[var(--fd-c-sidebar)] md:min-w-[var(--fd-sidebar-width)] md:border-e md:ps-[calc(var(--fd-c-sidebar)-var(--fd-sidebar-width))]',
+          'max-md:inset-0 max-md:bg-fd-background/80 max-md:pt-14 max-md:text-[15px] max-md:backdrop-blur-md max-md:data-[open=false]:hidden',
           props.aside?.className,
         )}
       >
-        <div
-          {...props.bannerProps}
-          className={cn(
-            'flex flex-col gap-2 px-4 pt-2 md:px-3 md:pt-4',
-            props.bannerProps?.className,
-          )}
-        >
-          {props.banner}
-          {search.enabled ? (
-            <LargeSearchToggle className="rounded-lg max-md:hidden" />
-          ) : null}
-        </div>
-        <ViewportContent>
-          {items.length > 0 && (
-            <div className="flex flex-col md:hidden">
-              {items.map((item, i) => (
-                <LinkItem key={i} item={item} on="menu" />
-              ))}
-            </div>
-          )}
-        </ViewportContent>
-        <div
-          {...props.footerProps}
-          className={cn(
-            'flex flex-row items-center border-t px-4 pb-2 pt-1 md:px-3',
-            props.footerProps?.className,
-          )}
-        >
-          {props.footer}
-        </div>
+        {hasSearch || props.banner ? (
+          <div
+            {...props.bannerProps}
+            className={cn(
+              'flex flex-col gap-1 px-4 pt-2 md:px-3 md:pt-4',
+              props.bannerProps?.className,
+            )}
+          >
+            {props.banner}
+            {hasSearch ? (
+              <LargeSearchToggle className="rounded-lg max-md:hidden" />
+            ) : null}
+          </div>
+        ) : null}
+        <ViewportContent items={items} />
+        {props.footer ? (
+          <div
+            {...props.footerProps}
+            className={cn(
+              'flex flex-row items-center border-t py-1 max-md:px-4 md:mx-3',
+              props.footerProps?.className,
+            )}
+          >
+            {props.footer}
+          </div>
+        ) : null}
       </Base.SidebarList>
     </Context.Provider>
   );
 }
 
 function ViewportContent({
-  children,
+  items,
 }: {
-  children: React.ReactNode;
+  items: LinkItemType[];
 }): React.ReactElement {
   const { root } = useTreeContext();
 
@@ -156,14 +160,17 @@ function ViewportContent({
     <ScrollArea className="flex-1">
       <ScrollViewport
         style={{
-          maskImage:
-            'linear-gradient(to bottom, transparent 2px, white 24px, white calc(100% - 24px), transparent calc(100% - 2px))',
+          maskImage: 'linear-gradient(to bottom, transparent 2px, white 24px)',
         }}
       >
-        <div className="flex flex-col gap-8 px-4 py-6 md:px-3">
-          {children}
-          <NodeList items={root.children} />
-        </div>
+        {items.length > 0 ? (
+          <div className="flex flex-col px-4 pt-6 md:hidden">
+            {items.map((item, i) => (
+              <LinkItem key={i} item={item} on="menu" />
+            ))}
+          </div>
+        ) : null}
+        <NodeList items={root.children} className="px-4 py-6 md:px-3" />
       </ScrollViewport>
     </ScrollArea>
   );
@@ -222,7 +229,7 @@ function PageNode({
 }
 
 function FolderNode({
-  item: { name, children, index, icon, defaultOpen = false },
+  item,
   level,
 }: {
   item: PageTree.Folder;
@@ -230,14 +237,15 @@ function FolderNode({
 }): React.ReactElement {
   const { defaultOpenLevel, prefetch } = useContext(Context);
   const pathname = usePathname();
-  const active = index !== undefined && isActive(index.url, pathname, false);
+  const active =
+    item.index !== undefined && isActive(item.index.url, pathname, false);
   const childActive = useMemo(
-    () => hasActive(children, pathname),
-    [children, pathname],
+    () => hasActive(item.children, pathname),
+    [item.children, pathname],
   );
 
   const shouldExtend =
-    active || childActive || defaultOpenLevel >= level || defaultOpen;
+    active || childActive || (item.defaultOpen ?? defaultOpenLevel >= level);
   const [open, setOpen] = useState(shouldExtend);
 
   useOnChange(shouldExtend, (v) => {
@@ -260,8 +268,8 @@ function FolderNode({
 
   const content = (
     <>
-      {icon}
-      {name}
+      {item.icon}
+      {item.name}
       <ChevronDown
         data-icon
         className={cn('ms-auto transition-transform', !open && '-rotate-90')}
@@ -271,10 +279,10 @@ function FolderNode({
 
   return (
     <Collapsible open={open} onOpenChange={setOpen}>
-      {index ? (
+      {item.index ? (
         <Link
           className={cn(itemVariants({ active }))}
-          href={index.url}
+          href={item.index.url}
           onClick={onClick}
           prefetch={prefetch}
         >
@@ -288,7 +296,7 @@ function FolderNode({
       <CollapsibleContent>
         <NodeList
           className="ms-2 flex flex-col border-s py-2 ps-2"
-          items={children}
+          items={item.children}
           level={level}
         />
       </CollapsibleContent>

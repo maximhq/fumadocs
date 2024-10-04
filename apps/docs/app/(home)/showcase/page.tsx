@@ -3,15 +3,17 @@ import Image, { type StaticImageData } from 'next/image';
 import { cn } from '@/utils/cn';
 import { buttonVariants } from '@/components/ui/button';
 import { createMetadata } from '@/utils/metadata';
-import NextFAQImage from '@/public/showcases/next-faq.png';
-import YeecordImage from '@/public/showcases/yeecord.png';
-import NuqsImage from '@/public/showcases/nuqs.jpg';
+import NextFAQ from '@/public/showcases/next-faq.png';
+import Yeecord from '@/public/showcases/yeecord.png';
+import Nuqs from '@/public/showcases/nuqs.jpg';
 import FrameGround from '@/public/showcases/frameground.png';
 import Xlog from '@/public/showcases/xlog.png';
 import Briefkasten from '@/public/showcases/briefkasten.png';
 import Turbo from '@/public/showcases/turbo.png';
 import Million from '@/public/showcases/million.png';
 import Spot from '@/public/spot.png';
+import Hiro from '@/public/showcases/hiro.png';
+import DokPloy from '@/public/showcases/dokploy.png';
 
 export const metadata = createMetadata({
   title: 'Showcase',
@@ -35,12 +37,12 @@ export default function Showcase(): React.ReactElement {
       url: 'https://turbo.build',
     },
     {
-      image: NextFAQImage,
+      image: NextFAQ,
       name: 'Next.js Discord Common Questions',
       url: 'https://nextjs-faq.com',
     },
     {
-      image: YeecordImage,
+      image: Yeecord,
       name: 'Yeecord Docs',
       url: 'https://yeecord.com',
     },
@@ -49,7 +51,17 @@ export default function Showcase(): React.ReactElement {
       name: 'Million',
       url: 'https://million.dev',
     },
-    { image: NuqsImage, name: 'nuqs', url: 'https://nuqs.47ng.com' },
+    { image: Nuqs, name: 'nuqs', url: 'https://nuqs.47ng.com' },
+    {
+      image: DokPloy,
+      name: 'Dokploy',
+      url: 'https://dokploy.com',
+    },
+    {
+      image: Hiro,
+      name: 'Hiro',
+      url: 'https://docs.hiro.so/stacks',
+    },
     {
       name: 'Typelytics',
       url: 'https://typelytics.rhyssul.com',
@@ -61,7 +73,7 @@ export default function Showcase(): React.ReactElement {
     },
     {
       name: "RUNFUNRUN's Blog",
-      url: 'https://www.runfunrun.tech',
+      url: 'https://runfunrun.dev',
     },
     {
       image: Briefkasten,
@@ -92,7 +104,7 @@ export default function Showcase(): React.ReactElement {
           <br />
           Made with Fumadocs
         </h1>
-        <p className="text-muted-foreground">
+        <p className="text-fd-muted-foreground">
           Nice open-source projects powered by Fumadocs
         </p>
         <div className="mt-6">
@@ -128,7 +140,7 @@ function ShowcaseItem({
         href={url}
         target="_blank"
         rel="noreferrer noopener"
-        className="relative flex aspect-[1.91/1] flex-col overflow-hidden rounded-2xl border transition-all hover:border-primary/30"
+        className="relative flex aspect-[1.91/1] flex-col overflow-hidden rounded-2xl border transition-all hover:border-fd-primary/30"
       >
         <Image
           alt="Preview"
@@ -149,7 +161,7 @@ function ShowcaseItem({
       href={url}
       target="_blank"
       rel="noreferrer noopener"
-      className="flex aspect-[1.91/1] flex-col rounded-2xl border border-transparent p-8 text-center shadow-primary/20 transition-all hover:shadow-primary/30"
+      className="flex aspect-[1.91/1] flex-col rounded-2xl border border-transparent p-8 text-center shadow-fd-primary/20 transition-all hover:shadow-fd-primary/30"
       style={{
         backgroundImage:
           'radial-gradient(closest-side at center, hsl(var(--background)) 89%, transparent 90%),' +
@@ -160,7 +172,7 @@ function ShowcaseItem({
         backgroundClip: 'padding-box, padding-box, border-box',
       }}
     >
-      <p className="mb-6 text-muted-foreground">{new URL(url).hostname}</p>
+      <p className="mb-6 text-fd-muted-foreground">{new URL(url).hostname}</p>
       <p className="text-3xl font-semibold">{name}</p>
     </a>
   );

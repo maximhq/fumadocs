@@ -9,13 +9,21 @@ import type {
 import NextImage from 'next/image';
 import type { ImageProps } from 'next/image';
 import { Card, Cards } from '@/components/card';
+import { Callout } from '@/components/callout';
 import { Heading } from '@/components/heading';
 import { defaultImageSizes } from '@/utils/shared';
+import { cn } from '@/utils/cn';
 
 declare const { Pre }: typeof import('./mdx.client');
 
 function Image(props: ImgHTMLAttributes<HTMLImageElement>): React.ReactElement {
-  return <NextImage sizes={defaultImageSizes} {...(props as ImageProps)} />;
+  return (
+    <NextImage
+      sizes={defaultImageSizes}
+      {...(props as ImageProps)}
+      className={cn('rounded-lg', props.className)}
+    />
+  );
 }
 
 function Table(
@@ -53,6 +61,7 @@ const defaultMdxComponents = {
     <Heading as="h6" {...props} />
   ),
   table: Table,
+  Callout,
 };
 
 /**

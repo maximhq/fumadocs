@@ -1,31 +1,7 @@
 import type { HTMLAttributes } from 'react';
 import Image from 'next/image';
 import { cn } from '@/utils/cn';
-
-interface Contributor {
-  avatar_url: string;
-  login: string;
-  contributions: number;
-}
-
-async function fetchContributors(
-  repoOwner: string,
-  repoName: string,
-): Promise<Contributor[]> {
-  const response = await fetch(
-    `https://api.github.com/repos/${repoOwner}/${repoName}/contributors?per_page=50`,
-    { next: { revalidate: 1000 * 1000 } },
-  );
-
-  if (!response.ok) {
-    throw new Error(`Failed to fetch contributors: ${response.statusText}`);
-  }
-
-  const contributors = (await response.json()) as Contributor[];
-  return contributors
-    .filter((contributor) => !contributor.login.endsWith('[bot]'))
-    .sort((a, b) => b.contributions - a.contributions);
-}
+import { fetchContributors } from '@/utils/get-contributors';
 
 export interface ContributorCounterProps
   extends HTMLAttributes<HTMLDivElement> {
@@ -37,7 +13,7 @@ export interface ContributorCounterProps
 export default async function ContributorCounter({
   repoOwner,
   repoName,
-  displayCount = 40,
+  displayCount = 20,
   ...props
 }: ContributorCounterProps): Promise<React.ReactElement> {
   const contributors = await fetchContributors(repoOwner, repoName);
@@ -57,9 +33,7 @@ export default async function ContributorCounter({
             href={`https://github.com/${contributor.login}`}
             rel="noreferrer noopener"
             target="_blank"
-            className={cn(
-              'size-10 overflow-hidden rounded-full border-4 border-background bg-background md:-mr-4 md:size-12',
-            )}
+            className="size-10 overflow-hidden rounded-full border-4 border-fd-background bg-fd-background md:-mr-4 md:size-12"
             style={{
               zIndex: topContributors.length - i,
             }}
@@ -74,12 +48,12 @@ export default async function ContributorCounter({
           </a>
         ))}
         {displayCount < contributors.length ? (
-          <div className="size-12 content-center rounded-full bg-secondary text-center">
+          <div className="size-12 content-center rounded-full bg-fd-secondary text-center">
             +{contributors.length - displayCount}
           </div>
         ) : null}
       </div>
-      <div className="text-center text-sm text-muted-foreground">
+      <div className="text-center text-sm text-fd-muted-foreground">
         Some of our best contributors.
       </div>
     </div>

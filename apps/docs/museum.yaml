@@ -68,6 +68,15 @@ paths:
         '404':
           description: Not found
     get:
+      x-codeSamples:
+        - lang: js
+          label: JavaScript
+        - lang: go
+          label: Go
+        - lang: bash
+          label: cURL
+        - lang: python
+          label: Python
       summary: List special events
       description: Return a list of upcoming special events at the museum.
       operationId: listSpecialEvents
@@ -173,9 +182,19 @@ paths:
       requestBody:
         required: true
         content:
-          application/json:
+          multipart/form-data:
             schema:
-              $ref: '#/components/schemas/BuyMuseumTicketsRequest'
+              allOf:
+                - $ref: '#/components/schemas/BuyMuseumTicketsRequest'
+                - type: object
+                  properties:
+                    test:
+                      type: string
+                      enum:
+                        - general
+                        - gold
+                        - platinum
+                        - vip
             examples:
               general_entry:
                 $ref: '#/components/examples/BuyGeneralTicketsRequestExample'
@@ -255,6 +274,9 @@ components:
           $ref: '#/components/schemas/Email'
         phone:
           $ref: '#/components/schemas/Phone'
+        image:
+          type: string
+          format: binary
       required:
         - ticketType
         - ticketDate

@@ -9,12 +9,31 @@ Footer, and Breadcrumb.
 ## Usage
 
 ```tsx
-import { DocsPage, DocsBody } from 'fumadocs-ui/page';
+import {
+  DocsPage,
+  DocsDescription,
+  DocsTitle,
+  DocsBody,
+} from 'fumadocs-ui/page';
 
 <DocsPage>
+  <DocsTitle>title</DocsTitle>
+  <DocsDescription>description</DocsDescription>
   <DocsBody>...</DocsBody>
 </DocsPage>;
 ```
+
+### Page
+
+The main layout of docs pages.
+
+### Title
+
+Page title.
+
+### Description
+
+Page description.
 
 ### Body
 
@@ -28,6 +47,21 @@ import { DocsBody } from 'fumadocs-ui/page';
 <DocsBody>
   <h1>This heading looks good!</h1>
 </DocsBody>;
+```
+
+### Category
+
+Optional, display the other pages in its folder.
+
+> You can use this component without `<DocsPage />`.
+
+```tsx
+import { DocsPage, DocsCategory } from 'fumadocs-ui/page';
+import { getPages } from '@/app/source';
+
+<DocsPage>
+  <DocsCategory page={page} pages={getPages()} />
+</DocsPage>;
 ```
 
 ## Configurations
@@ -94,17 +128,57 @@ import { DocsPage } from 'fumadocs-ui/page';
 
 ### Last Updated Time
 
+Display last updated time of the page.
+
+```tsx
+import { DocsPage } from 'fumadocs-ui/page';
+
+<DocsPage lastUpdate={new Date(lastModifiedTime)} />;
+```
+
 Since you might have different version controls (e.g. Github) or it's from
 remote sources like Sanity, Fumadocs UI doesn't display the last updated time by
 default.
 
 For Github hosted documents, you can use
-the [Git Last Modified](/docs/headless/utils/git-last-edit) utility.
+the [`getGithubLastEdit`](/docs/headless/utils/git-last-edit) utility.
 
-```jsx
+```tsx
+import { DocsPage } from 'fumadocs-ui/page';
+import { getGithubLastEdit } from 'fumadocs-core/server';
+
+const time = await getGithubLastEdit({
+  owner: 'fuma-nama',
+  repo: 'fumadocs',
+  path: `content/docs/${page.file.path}`,
+});
+
+<DocsPage lastUpdate={new Date(time)} />;
+```
+
+<Callout type='info' title='Note'>
+
+    You can also manually specify the last updated time of documents (e.g. using frontmatter).
+    Don't forget to [update the schema type](/docs/mdx/validation) on Fumadocs MDX.
+
+</Callout>
+
+### Edit on GitHub
+
+A shortcut to add "Edit on GitHub" button to TOC footer.
+
+```tsx
 import { DocsPage } from 'fumadocs-ui/page';
 
-<DocsPage lastUpdate={new Date(lastModifiedTime)} />;
+<DocsPage
+  editOnGithub={{
+    owner: 'fuma-nama',
+    repo: 'fumadocs',
+    sha: 'main',
+    // file path, make sure it's valid
+    path: `content/docs/${page.file.path}`,
+  }}
+/>;
 ```
 
 ### Footer

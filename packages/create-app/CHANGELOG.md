@@ -1,5 +1,91 @@
 # create-next-docs-app
 
+## 13.4.10
+
+## 13.4.9
+
+## 13.4.8
+
+## 13.4.7
+
+### Patch Changes
+
+- 6e1923e: Fix typos
+
+## 13.4.6
+
+### Patch Changes
+
+- 9c2095e: Add home layout by default
+
+## 13.4.5
+
+## 13.4.4
+
+## 13.4.3
+
+### Patch Changes
+
+- e409799: Fix typos
+
+## 13.4.2
+
+### Patch Changes
+
+- 0c251e5: Bump deps
+
+## 13.4.1
+
+## 13.4.0
+
+## 13.3.3
+
+## 13.3.2
+
+## 13.3.1
+
+## 13.3.0
+
+### Patch Changes
+
+- 5ed3e08: Install the @types/node package
+
+## 13.2.2
+
+## 13.2.1
+
+## 13.2.0
+
+### Patch Changes
+
+- 70f15af: Support to initialize git repo
+
+## 13.1.0
+
+## 13.0.7
+
+## 13.0.6
+
+## 13.0.5
+
+## 13.0.4
+
+## 13.0.3
+
+## 13.0.2
+
+## 13.0.1
+
+### Patch Changes
+
+- 1f1989e: Update versions
+
+## 13.0.0
+
+## 12.5.6
+
+## 12.5.5
+
 ## 12.5.4
 
 ## 12.5.3

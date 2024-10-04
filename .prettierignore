@@ -10,9 +10,14 @@ apps/docs/shaders/*
 **/test/out/**/*
 **/test/fixtures/*.output.*
 
-apps/docs/content/docs/ui/museum/events.mdx
-apps/docs/content/docs/ui/museum/operations.mdx
-apps/docs/content/docs/ui/museum/tickets.mdx
+out
+.content-collections
+
+apps/docs/content/docs/ui/museum/*.mdx
+!apps/docs/content/docs/ui/museum/index.mdx
+
+examples/openapi/content/docs/(api)/**/*.mdx
+!examples/openapi/content/docs/(api)/index.mdx
 
 apps/docs/content/docs/ui/typescript.mdx
 

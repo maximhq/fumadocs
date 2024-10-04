@@ -1,15 +1,15 @@
 ---
 title: Source API
-description: Turn a content source into an unified interface
+description: Turn a content source into a unified interface
 ---
 
 ## Usage
 
-Source API is a helper to load file-system based content sources, it offers an unified interface to integrate different content sources with Fumadocs.
+Source API is a helper to load file-system based content sources, it offers a unified interface to integrate content sources with Fumadocs.
 
 It handles some important jobs:
 
-- Build page trees from file-system information
+- Build page trees based on file system
 - Generate Urls and slugs based on file path
 - Output useful utilities to search or walk over files
 
@@ -18,32 +18,15 @@ It doesn't rely on the real file system (zero `node:fs` usage), a virtual storag
 You can use it with built-in content sources like Fumadocs MDX.
 
 ```ts
-import { map } from '@/.map';
 import { createMDXSource } from 'fumadocs-mdx';
 import { loader } from 'fumadocs-core/source';
 
-export const docs = loader({
-  source: createMDXSource(map),
+export const source = loader({
+  source: createMDXSource(docs, meta),
 });
 ```
 
 > The output page tree strictly follows [Page Conventions](/docs/headless/page-conventions).
-
-### Root Directory
-
-All files outside of the root directory will be ignored.
-
-```ts
-import { loader } from 'fumadocs-core/source';
-
-loader({
-  rootDir: 'docs',
-});
-```
-
-<Callout type="warn">
-  Relative paths, like `./` and `../` are not supported.
-</Callout>
 
 ### Base URL
 
@@ -66,7 +49,7 @@ import { loader } from 'fumadocs-core/source';
 import { icons } from 'lucide-react';
 import { createElement } from 'react';
 
-export const utils = loader({
+loader({
   icon(icon) {
     if (!icon) {
       // You may set a default icon
@@ -77,6 +60,28 @@ export const utils = loader({
   },
 });
 ```
+
+### Root Directory
+
+Filter the input files by its located directory.
+
+```ts
+import { loader } from 'fumadocs-core/source';
+
+loader({
+  rootDir: 'test',
+});
+```
+
+Content sources only provide **a virtual file path** to the loader (like `test/index.mdx`).
+Relative paths such as `./` and `../` are not supported.
+
+<Callout type='warn' title='Be Careful'>
+
+This is not equivalent to your content directory configured on content source (e.g. [Fumadocs MDX `dir` option](/docs/mdx/configuration#collections)).
+Please use relevant options on your source instead.
+
+</Callout>
 
 ## Deep Dive
 
@@ -99,10 +104,12 @@ loader({
 });
 ```
 
-### Attach Custom Properties
+### Page Tree
 
-The `pageTree` option allows you to customise how the page tree builder processes different nodes.
+The page tree is generated from your file system, using the **Page Tree Builder**.
+It also filters out some unnecessary information (e.g. file path), which means after the generation process, you cannot access the file path of a page node.
 
+To customise the process, use the `pageTree` option.
 You can attach custom properties to page tree nodes, like customising the display name of pages and folders.
 
 ```ts
@@ -110,9 +117,13 @@ import { loader } from 'fumadocs-core/source';
 
 loader({
   pageTree: {
-    attachFolderIds: true, // add `folder.id` property
-    attachFolder: (node) => ({ ... }), // change folder nodes
-  }
+    attachFile(node, file) {
+      // you can access its file information
+      console.log(file.data);
+
+      return node;
+    },
+  },
 });
 ```
 
@@ -121,7 +132,7 @@ JSX nodes are also allowed.
 ```tsx
 import { loader } from 'fumadocs-core/source';
 
-export const docs = loader({
+loader({
   pageTree: {
     attachFile(node) {
       node.name = <>Some JSX Nodes here</>;
@@ -137,10 +148,10 @@ To plug your own content source, create a `Source` object.
 
 It includes a `files` property which is an array of virtual files.
 Each virtual file must contain its file path and corresponding data.
-Yo can check type definitions for more info.
+You can check type definitions for more info.
 
 Since Source API doesn't rely on file system, file paths cannot be absolute or relative (for example, `./file.mdx` and `D://content/file.mdx` are not allowed).
-Instead, pass the file paths like `file.mdx` and`content/file.mdx`.
+Instead, pass the file paths like `file.mdx` and `content/file.mdx`.
 
 ```ts
 import { Source } from 'fumadocs-core/source';

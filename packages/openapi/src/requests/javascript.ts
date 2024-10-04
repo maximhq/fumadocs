@@ -1,35 +1,62 @@
-import { type Endpoint } from '@/endpoint';
-import { generateInput } from '@/utils/generate-input';
+import { type EndpointSample } from '@/schema/sample';
+import { toSampleInput } from '@/utils/schema';
 
-export function getSampleRequest(endpoint: Endpoint): string {
+export function getSampleRequest(endpoint: EndpointSample): string {
   const s: string[] = [];
   const options = new Map<string, string>();
-  const headers: Record<string, unknown> = {};
-  const formData: Record<string, unknown> = {};
+  const headers = new Map<string, unknown>();
+  const cookies = new Map<string, unknown>();
 
   for (const param of endpoint.parameters) {
     if (param.in === 'header') {
-      headers[param.name] = generateInput(endpoint.method, param.schema);
+      headers.set(param.name, param.sample);
     }
 
-    if (param.in === 'formData') {
-      formData[param.name] = generateInput(endpoint.method, param.schema);
+    if (param.in === 'cookie') {
+      cookies.set(param.name, param.sample);
     }
   }
 
-  options.set('method', JSON.stringify(endpoint.method));
-
-  if (Object.keys(headers).length > 0) {
-    options.set('headers', JSON.stringify(headers, undefined, 2));
+  if (cookies.size > 0) {
+    headers.set(
+      'cookie',
+      Array.from(cookies.entries())
+        .map(([key, value]) => `${key}=${toSampleInput(value)}`)
+        .join('; '),
+    );
   }
 
-  if (Object.keys(formData).length > 0) {
+  if (headers.size > 0) {
+    options.set(
+      'headers',
+      JSON.stringify(
+        Object.fromEntries(headers.entries()),
+        undefined,
+        2,
+      ).replaceAll('\n', '\n  '),
+    );
+  }
+
+  if (
+    endpoint.body?.mediaType === 'multipart/form-data' &&
+    typeof endpoint.body.sample === 'object' &&
+    endpoint.body.sample
+  ) {
     s.push(`const formData = new FormData();`);
 
-    for (const [key, value] of Object.entries(formData))
-      s.push(`formData.set(${key}, ${JSON.stringify(value)}`);
+    for (const [key, value] of Object.entries(endpoint.body.sample))
+      s.push(`formData.set(${key}, ${JSON.stringify(value)})`);
 
     options.set('body', 'formData');
+  } else if (endpoint.body) {
+    options.set(
+      'body',
+      `JSON.stringify(${JSON.stringify(
+        endpoint.body.sample,
+        null,
+        2,
+      ).replaceAll('\n', '\n  ')})`,
+    );
   }
 
   const optionsStr = Array.from(options.entries())

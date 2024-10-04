@@ -1,21 +1,18 @@
 import * as OpenAPI from 'fumadocs-openapi';
 import * as Typescript from 'fumadocs-typescript';
 import * as path from 'node:path';
+import { rimrafSync } from 'rimraf';
+
+rimrafSync('./content/docs/ui/museum', {
+  filter(v) {
+    return !v.endsWith('index.mdx') && !v.endsWith('meta.json');
+  },
+});
 
 void OpenAPI.generateFiles({
-  input: ['./*.yaml'],
-  output: './content/docs/ui',
-  per: 'tag',
-  renderer: {
-    Root(props, child) {
-      return OpenAPI.createElement(
-        'Root',
-        props,
-        '<div className="bg-secondary p-4 rounded-lg">Demo Only</div>',
-        ...child,
-      );
-    },
-  },
+  input: ['./museum.yaml'],
+  output: './content/docs/ui/museum',
+  per: 'operation',
 });
 
 const demoRegex = /^---type-table-demo---\r?\n(?<content>.+)\r?\n---end---$/gm;

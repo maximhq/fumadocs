@@ -4,7 +4,7 @@ import { remark } from 'remark';
 import remarkGfm from 'remark-gfm';
 import remarkMdx from 'remark-mdx';
 import type { PluggableList, Transformer } from 'unified';
-import { visit } from 'unist-util-visit';
+import { visit, type Test } from 'unist-util-visit';
 import { flattenNode } from './remark-utils';
 
 interface Heading {
@@ -27,9 +27,11 @@ export interface StructuredData {
 
 export interface StructureOptions {
   /**
-   * Types to be scanned, default: `["heading", "blockquote", "paragraph"]`
+   * Types to be scanned.
+   *
+   * @defaultValue ['paragraph', 'blockquote', 'heading', 'tableCell']
    */
-  types?: string[];
+  types?: Test;
 }
 
 const slugger = new Slugger();
@@ -38,12 +40,26 @@ const slugger = new Slugger();
  * Attach structured data to VFile, you can access via `vfile.data.structuredData`.
  */
 export function remarkStructure({
-  types = ['paragraph', 'blockquote', 'heading'],
+  types = ['paragraph', 'blockquote', 'heading', 'tableCell'],
 }: StructureOptions = {}): Transformer<Root, Root> {
   return (node, file) => {
     slugger.reset();
     const data: StructuredData = { contents: [], headings: [] };
     let lastHeading: string | undefined = '';
+
+    // Fumadocs OpenAPI Generated Structured Data
+    if (file.data.frontmatter) {
+      const frontmatter = file.data.frontmatter as {
+        _openapi?: {
+          structuredData?: StructuredData;
+        };
+      };
+
+      if (frontmatter._openapi?.structuredData) {
+        data.headings.push(...frontmatter._openapi.structuredData.headings);
+        data.contents.push(...frontmatter._openapi.structuredData.contents);
+      }
+    }
 
     visit(node, types, (element) => {
       if (element.type === 'root') return;

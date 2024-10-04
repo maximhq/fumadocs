@@ -24,8 +24,9 @@ import {
   FormLabel,
   labelVariants,
 } from '@/ui/components/form';
-import { getDefaultValue, resolve } from '@/ui/shared';
+import { resolve } from '@/ui/api/resolve';
 import { Input } from '@/ui/components/input';
+import { getDefaultValue } from '@/ui/api/get-default-values';
 import { useSchemaContext } from './contexts/schema';
 
 interface RenderOptions {
@@ -40,7 +41,7 @@ function renderInner({ field, ...props }: RenderOptions): React.ReactNode {
       <ObjectInput
         field={field}
         {...props}
-        className={cn('rounded-lg border bg-accent/20 p-3', props.className)}
+        className={cn('rounded-lg border bg-fd-accent/20 p-3', props.className)}
       />
     );
   if (field.type === 'switcher')
@@ -50,7 +51,10 @@ function renderInner({ field, ...props }: RenderOptions): React.ReactNode {
       <ArrayInput
         field={field}
         {...props}
-        className={cn('rounded-lg border bg-background p-3', props.className)}
+        className={cn(
+          'rounded-lg border bg-fd-background p-3',
+          props.className,
+        )}
       />
     );
   if (field.type === 'null') return null;
@@ -89,7 +93,7 @@ function InputContainer({
         {required ? <span className="text-red-500">*</span> : null}
         <div className="flex-1" />
         {type ? (
-          <code className="text-xs text-muted-foreground">{type}</code>
+          <code className="text-xs text-fd-muted-foreground">{type}</code>
         ) : null}
         {toolbar}
       </div>
@@ -360,7 +364,7 @@ export function InputField({
         <ObjectInput
           field={field}
           fieldName={fieldName}
-          className="rounded-lg border bg-accent/20 p-3"
+          className="rounded-lg border bg-fd-accent/20 p-3"
         />
       </InputContainer>
     );
@@ -379,7 +383,7 @@ export function InputField({
         <ArrayInput
           fieldName={fieldName}
           field={field}
-          className="rounded-lg border bg-background p-3"
+          className="rounded-lg border bg-fd-background p-3"
         />
       </InputContainer>
     );
@@ -400,7 +404,7 @@ export function InputField({
           <FormLabel className="inline-flex items-center gap-1">
             {name}
             {field.isRequired ? <span className="text-red-500">*</span> : null}
-            <code className="ms-auto text-xs text-muted-foreground">
+            <code className="ms-auto text-xs text-fd-muted-foreground">
               {field.type}
             </code>
             {toolbar}
@@ -422,10 +426,35 @@ function NormalInput({
   header,
   field,
   ...props
-}: InputProps<'string' | 'boolean' | 'number'> & {
+}: InputProps<'string' | 'boolean' | 'number' | 'file'> & {
   header?: React.ReactNode;
 }): React.ReactElement {
   const { control } = useFormContext();
+
+  if (field.type === 'file') {
+    return (
+      <FormField
+        control={control}
+        name={fieldName}
+        render={({ field: { value: _value, onChange, ...restField } }) => (
+          <FormItem {...props}>
+            {header}
+            <FormControl>
+              <input
+                type="file"
+                multiple={false}
+                onChange={(e) => {
+                  if (!e.target.files) return;
+                  onChange(e.target.files.item(0));
+                }}
+                {...restField}
+              />
+            </FormControl>
+          </FormItem>
+        )}
+      />
+    );
+  }
 
   if (field.type === 'boolean') {
     return (

@@ -1,5 +1,443 @@
 # next-docs-ui
 
+## 13.4.10
+
+### Patch Changes
+
+- 4cb74d5: Expose more props to Image Zoom
+- Updated dependencies [6231ad3]
+  - fumadocs-core@13.4.10
+
+## 13.4.9
+
+### Patch Changes
+
+- bcf51a6: Improve banner rainbow variant
+- Updated dependencies [083f04a]
+  - fumadocs-core@13.4.9
+
+## 13.4.8
+
+### Patch Changes
+
+- 5581733: Add center to root toggle
+- 1a327cc: Fix props types of Root Toggle
+- Updated dependencies [78e59e7]
+  - fumadocs-core@13.4.8
+
+## 13.4.7
+
+### Patch Changes
+
+- 6e1923e: Fix ocean present background repeat
+- 6e1923e: Introduce `rainbow` variant on Banner component
+- Updated dependencies [6e1923e]
+  - fumadocs-core@13.4.7
+
+## 13.4.6
+
+### Patch Changes
+
+- b33aff0: Fix typography styles
+- afb697e: Fix Next.js 14.2.8 dynamic import problems
+- 6bcd263: Fix Banner component z-index
+- Updated dependencies [afb697e]
+- Updated dependencies [daa66d2]
+  - fumadocs-core@13.4.6
+
+## 13.4.5
+
+### Patch Changes
+
+- d46a3f1: Improve search dialog
+  - fumadocs-core@13.4.5
+
+## 13.4.4
+
+### Patch Changes
+
+- Updated dependencies [729928e]
+  - fumadocs-core@13.4.4
+
+## 13.4.3
+
+### Patch Changes
+
+- fumadocs-core@13.4.3
+
+## 13.4.2
+
+### Patch Changes
+
+- 0c251e5: Bump deps
+- 0c251e5: Support Shiki inline code
+- 0c251e5: Improve nested list styles
+- Updated dependencies [7dabbc1]
+- Updated dependencies [0c251e5]
+- Updated dependencies [3b56170]
+  - fumadocs-core@13.4.2
+
+## 13.4.1
+
+### Patch Changes
+
+- Updated dependencies [95dbba1]
+  - fumadocs-core@13.4.1
+
+## 13.4.0
+
+### Minor Changes
+
+- 26f5360: Support built-in OG Image generation
+
+### Patch Changes
+
+- fumadocs-core@13.4.0
+
+## 13.3.3
+
+### Patch Changes
+
+- Updated dependencies [f8cc167]
+  - fumadocs-core@13.3.3
+
+## 13.3.2
+
+### Patch Changes
+
+- 17746a6: Support built-in edit on github button
+- Updated dependencies [0e0ef8c]
+  - fumadocs-core@13.3.2
+
+## 13.3.1
+
+### Patch Changes
+
+- 7258c4b: Fix thumb not rendered on initial render
+  - fumadocs-core@13.3.1
+
+## 13.3.0
+
+### Minor Changes
+
+- 8f5b19e: Introduce `DocsTitle`, `DocsDescription` and `DocsCategory` components
+- 32ca37a: Support Clerk-style TOC
+- 9aae448: Support multiple toc active items
+- c542561: Use cookie to store active locale on `always` mode
+
+### Patch Changes
+
+- Updated dependencies [4916f84]
+- Updated dependencies [fd46eb6]
+- Updated dependencies [fd46eb6]
+- Updated dependencies [fd46eb6]
+- Updated dependencies [fd46eb6]
+- Updated dependencies [9aae448]
+- Updated dependencies [c542561]
+  - fumadocs-core@13.3.0
+
+## 13.2.2
+
+### Patch Changes
+
+- Updated dependencies [36b771b]
+- Updated dependencies [61b91fa]
+  - fumadocs-core@13.2.2
+
+## 13.2.1
+
+### Patch Changes
+
+- Updated dependencies [17fa173]
+  - fumadocs-core@13.2.1
+
+## 13.2.0
+
+### Minor Changes
+
+- ba588a2: Support custom max width
+- ec983a3: Change default value of `defaultOpenLevel` to 0
+
+### Patch Changes
+
+- 96c9dda: Change Heading scroll margins
+- 96c9dda: Hide TOC Popover on full mode
+- Updated dependencies [96c9dda]
+  - fumadocs-core@13.2.0
+
+## 13.1.0
+
+### Minor Changes
+
+- c8910c4: Add default 'max-height' to codeblocks
+
+### Patch Changes
+
+- 61ef42c: Add `vitepress` theme preset
+- deae4dd: Improve theme presets
+- c8910c4: Fix empty space on search dialog
+- 6c42960: Improve TOC design
+- Updated dependencies [f280191]
+  - fumadocs-core@13.1.0
+
+## 13.0.7
+
+### Patch Changes
+
+- e7c52f2: Fix code styles in headings
+- Updated dependencies [37bbfff]
+  - fumadocs-core@13.0.7
+
+## 13.0.6
+
+### Patch Changes
+
+- 1622e36: Fix bug breaking Tailwind CSS IntelliSense VSCode Extension
+  - fumadocs-core@13.0.6
+
+## 13.0.5
+
+### Patch Changes
+
+- Updated dependencies [2cf65f6]
+  - fumadocs-core@13.0.5
+
+## 13.0.4
+
+### Patch Changes
+
+- Updated dependencies [5355391]
+  - fumadocs-core@13.0.4
+
+## 13.0.3
+
+### Patch Changes
+
+- Updated dependencies [978342f]
+  - fumadocs-core@13.0.3
+
+## 13.0.2
+
+### Patch Changes
+
+- Updated dependencies [4819820]
+  - fumadocs-core@13.0.2
+
+## 13.0.1
+
+### Patch Changes
+
+- fumadocs-core@13.0.1
+
+## 13.0.0
+
+### Major Changes
+
+- 89190ae: **Rename `prefix` option on Tailwind CSS Plugin to `cssPrefix`**
+
+  **why:** The previous name was misleading
+
+  **migrate:** Rename the option.
+
+  ```js
+  import { createPreset } from 'fumadocs-ui/tailwind-plugin';
+
+  /** @type {import('tailwindcss').Config} */
+  export default {
+    presets: [
+      createPreset({
+        cssPrefix: 'fd',
+      }),
+    ],
+  };
+  ```
+
+- b02eebf: **Move `keepCodeBlockBackground` option to code block component**
+
+  **why:** Easier to customise code block styles.
+
+  **migrate:**
+
+  Enable `keepBackground` on `<CodeBlock />`, and remove deprecated usage.
+
+  ```tsx
+  import { Pre, CodeBlock } from 'fumadocs-ui/components/codeblock';
+
+  <MDX
+    components={{
+      pre: ({ ref: _ref, ...props }) => (
+        <CodeBlock keepBackground {...props}>
+          <Pre>{props.children}</Pre>
+        </CodeBlock>
+      ),
+    }}
+  />;
+  ```
+
+- f868018: **Replace `secondary` link items with `icon` link items**
+
+  **why:** Link items with type `secondary` has been deprecated long time ago.
+
+  **migrate:** Replace type `secondary` with `icon`.
+
+- 8aebeab: **Change usage of I18nProvider**
+
+  **why:** Make possible to load translations lazily
+
+  **migrate:**
+
+  ```tsx
+  import { RootProvider } from 'fumadocs-ui/provider';
+  import type { ReactNode } from 'react';
+  import { I18nProvider } from 'fumadocs-ui/i18n';
+
+  export default function Layout({
+    params: { lang },
+    children,
+  }: {
+    params: { lang: string };
+    children: ReactNode;
+  }) {
+    return (
+      <html lang={lang}>
+        <body>
+          <I18nProvider
+            locale={lang}
+            // options
+            locales={[
+              {
+                name: 'English',
+                locale: 'en',
+              },
+              {
+                name: 'Chinese',
+                locale: 'cn',
+              },
+            ]}
+            // translations
+            translations={
+              {
+                cn: {
+                  toc: '目錄',
+                  search: '搜尋文檔',
+                  lastUpdate: '最後更新於',
+                  searchNoResult: '沒有結果',
+                  previousPage: '上一頁',
+                  nextPage: '下一頁',
+                },
+              }[lang]
+            }
+          >
+            <RootProvider>{children}</RootProvider>
+          </I18nProvider>
+        </body>
+      </html>
+    );
+  }
+  ```
+
+- 8aebeab: **Require `locale` prop on I18nProvider**
+
+  **why:** Fix problems related to pathname parsing
+
+  **migrate:** Pass `locale` parameter to the provider
+
+- 0377bb4: **Rename `id` prop on Tabs component to `groupId`**
+
+  **why:** Conflicted with HTML `id` attribute.
+
+  **migrate:** Rename to `groupId`.
+
+- e8e6a17: **Make Tailwind CSS Plugin ESM-only**
+
+  **why:** Tailwind CSS supported ESM and TypeScript configs.
+
+  **migrate:** Use ESM syntax in your Tailwind CSS config.
+
+- c901e6b: **Remove deprecated `fumadocs-ui/components/api` components**
+
+  **why:** The new OpenAPI integration has its own UI implementation.
+
+  **migrate:** Update to latest OpenAPI integration.
+
+- 89190ae: **Add `fd-` prefix to all Fumadocs UI colors, animations and utilities**
+
+  **why:** The added Tailwind CSS colors may conflict with the existing colors of codebases.
+
+  **migrate:** Enable `addGlobalColors` on Tailwind CSS Plugin or add the `fd-` prefix to class names.
+
+  ```js
+  import { createPreset } from 'fumadocs-ui/tailwind-plugin';
+
+  /** @type {import('tailwindcss').Config} */
+  export default {
+    presets: [
+      createPreset({
+        addGlobalColors: true,
+      }),
+    ],
+  };
+  ```
+
+- b02eebf: **Change code block component usage**
+
+  **why:** The previous usage was confusing, some props are passed directly to `pre` while some are not.
+
+  **migrate:**
+
+  Pass all props to `CodeBlock` component.
+  This also includes class names, change your custom styles if necessary.
+
+  ```tsx
+  import { Pre, CodeBlock } from 'fumadocs-ui/components/codeblock';
+
+  <MDX
+    components={{
+      // HTML `ref` attribute conflicts with `forwardRef`
+      pre: ({ ref: _ref, ...props }) => (
+        <CodeBlock {...props}>
+          <Pre>{props.children}</Pre>
+        </CodeBlock>
+      ),
+    }}
+  />;
+  ```
+
+  You can ignore this if you didn't customise the default `pre` element.
+
+- 4373231: **Remove `RollButton` component**
+
+  **why:** `RollButton` was created because there were no "Table Of Contents" on mobile viewports. Now users can use the TOC Popover to switch between headings, `RollButton` is no longer a suitable design for Fumadocs UI.
+
+  **migrate:** Remove usages, you may copy the [last implementation of `RollButton`](https://github.com/fuma-nama/fumadocs/blob/fumadocs-ui%4012.5.6/packages/ui/src/components/roll-button.tsx).
+
+### Minor Changes
+
+- c684c00: Support to disable container style overriding
+- c8964d3: Include `Callout` as default MDX component
+
+### Patch Changes
+
+- daa7d3c: Fix empty folder animation problems
+- Updated dependencies [09c3103]
+- Updated dependencies [c714eaa]
+- Updated dependencies [b02eebf]
+  - fumadocs-core@13.0.0
+
+## 12.5.6
+
+### Patch Changes
+
+- a332bee: Support `undefined` state of `defaultOpen` in folder nodes
+  - fumadocs-core@12.5.6
+
+## 12.5.5
+
+### Patch Changes
+
+- 3519e6c: Fix TOC overflow problems
+  - fumadocs-core@12.5.5
+
 ## 12.5.4
 
 ### Patch Changes

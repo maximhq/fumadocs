@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import useSWR, { type SWRResponse } from 'swr';
-import type { SortedResult } from './shared';
+import { useDebounce } from '@/utils/use-debounce';
+import type { SortedResult } from '@/server/types';
 
 interface UseDocsSearch {
   search: string;
@@ -55,20 +56,4 @@ export function useDocsSearch(
   );
 
   return { search, setSearch, query };
-}
-
-function useDebounce<T>(value: T, delayMs = 1000): T {
-  const [debouncedValue, setDebouncedValue] = useState(value);
-
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedValue(value);
-    }, delayMs);
-
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [value, delayMs]);
-
-  return debouncedValue;
 }

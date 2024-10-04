@@ -1,5 +1,201 @@
 # next-docs-zeta
 
+## 13.4.10
+
+### Patch Changes
+
+- 6231ad3: fix(types): PageData & MetaData exactOptionalPropertyTypes compat
+
+## 13.4.9
+
+### Patch Changes
+
+- 083f04a: Fix link items text
+
+## 13.4.8
+
+### Patch Changes
+
+- 78e59e7: Support to add icons to link items in meta.json
+
+## 13.4.7
+
+### Patch Changes
+
+- 6e1923e: Improve anchors observer
+
+## 13.4.6
+
+### Patch Changes
+
+- afb697e: Fix Next.js 14.2.8 dynamic import problems
+- daa66d2: Support generating static params automatically with Source API
+
+## 13.4.5
+
+## 13.4.4
+
+### Patch Changes
+
+- 729928e: Fix build error without JS engine
+
+## 13.4.3
+
+## 13.4.2
+
+### Patch Changes
+
+- 7dabbc1: Remark Image: Support relative imports
+- 0c251e5: Bump deps
+- 3b56170: Support to enable experiment Shiki JS engine
+
+## 13.4.1
+
+### Patch Changes
+
+- 95dbba1: Scan table into search indexes by default
+
+## 13.4.0
+
+## 13.3.3
+
+### Patch Changes
+
+- f8cc167: Ignore numeric locale file name
+
+## 13.3.2
+
+### Patch Changes
+
+- 0e0ef8c: Support headless search servers
+
+## 13.3.1
+
+## 13.3.0
+
+### Minor Changes
+
+- fd46eb6: Export new `createI18nSearchAPIExperimental` API for i18n config
+- fd46eb6: Introduce `i18n` config for Core APIs
+- fd46eb6: Deprecated `languages` and `defaultLanguage` option on Source API, replaced with `i18n` config
+- fd46eb6: Move I18n middleware to `fumadocs-core/i18n`
+- 9aae448: Support multiple toc active items
+- c542561: Use cookie to store active locale on `always` mode
+
+### Patch Changes
+
+- 4916f84: Improve Source API performance
+
+## 13.2.2
+
+### Patch Changes
+
+- 36b771b: Remark Image: Support relative import path
+- 61b91fa: Improve Fumadocs OpenAPI support
+
+## 13.2.1
+
+### Patch Changes
+
+- 17fa173: Remark Image: Support fetching image size of external urls
+
+## 13.2.0
+
+### Patch Changes
+
+- 96c9dda: Change Heading scroll margins
+
+## 13.1.0
+
+### Patch Changes
+
+- f280191: Page Tree Builder: Sort folders to bottom
+
+## 13.0.7
+
+### Patch Changes
+
+- 37bbfff: Improve active anchor observer
+
+## 13.0.6
+
+## 13.0.5
+
+### Patch Changes
+
+- 2cf65f6: Support debounce value on algolia search client
+
+## 13.0.4
+
+### Patch Changes
+
+- 5355391: Support indexing description field on documents
+
+## 13.0.3
+
+### Patch Changes
+
+- 978342f: Type file system utilities (Note: This is an internal module, you're not supposed to reference it)
+
+## 13.0.2
+
+### Patch Changes
+
+- 4819820: Page Tree Builder: Fallback to page icon when metadata doesn't exist
+
+## 13.0.1
+
+## 13.0.0
+
+### Major Changes
+
+- 09c3103: **Change usage of TOC component**
+
+  **why:** Improve the flexibility of headless components
+
+  **migrate:**
+
+  Instead of
+
+  ```tsx
+  import * as Base from 'fumadocs-core/toc';
+
+  return (
+    <Base.TOCProvider>
+      <Base.TOCItem />
+    </Base.TOCProvider>
+  );
+  ```
+
+  Use
+
+  ```tsx
+  import * as Base from 'fumadocs-core/toc';
+
+  return (
+    <Base.AnchorProvider>
+      <Base.ScrollProvider>
+        <Base.TOCItem />
+        <Base.TOCItem />
+      </Base.ScrollProvider>
+    </Base.AnchorProvider>
+  );
+  ```
+
+- b02eebf: **Remove deprecated option `defaultLang`**
+
+  **why:** The default language feature has been supported by Shiki Rehype integration, you should use it directly.
+
+  **migrate:** Rename to `defaultLanguage`.
+
+### Minor Changes
+
+- c714eaa: Support Remark Admonition plugin
+
+## 12.5.6
+
+## 12.5.5
+
 ## 12.5.4
 
 ### Patch Changes

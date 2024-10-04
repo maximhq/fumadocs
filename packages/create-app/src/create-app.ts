@@ -1,5 +1,6 @@
 import path from 'node:path';
 import fs from 'node:fs/promises';
+import { tryGitInit } from '@/git';
 import localVersions from '../versions.json';
 import versionPkg from '../../create-app-versions/package.json';
 import type { PackageManager } from './auto-install';
@@ -12,11 +13,19 @@ export interface Options {
   outputDir: string;
   template: Template;
   tailwindcss: boolean;
-  installDeps: boolean;
   packageManager: PackageManager;
+
+  installDeps?: boolean;
+  initializeGit?: boolean;
+  log?: (message: string) => void;
 }
 
 export async function create(options: Options): Promise<void> {
+  const {
+    installDeps = true,
+    initializeGit = true,
+    log = console.log,
+  } = options;
   const projectName = path.basename(options.outputDir);
   const dest = path.resolve(cwd, options.outputDir);
   await copy(path.join(sourceDir, `template/+shared`), dest, (name) => {
@@ -29,9 +38,11 @@ export async function create(options: Options): Promise<void> {
   });
 
   await copy(path.join(sourceDir, `template/${options.template}`), dest);
+  log('Configured Typescript');
 
   if (options.tailwindcss) {
     await copy(path.join(sourceDir, `template/+tailwindcss`), dest);
+    log('Configured Tailwind CSS');
   }
 
   const packageJson = createPackageJson(projectName, options);
@@ -40,8 +51,13 @@ export async function create(options: Options): Promise<void> {
   const readMe = await getReadme(dest, projectName);
   await fs.writeFile(path.join(dest, 'README.md'), readMe);
 
-  if (options.installDeps) {
+  if (installDeps) {
     await autoInstall(options.packageManager, dest);
+    log('Installed dependencies');
+  }
+
+  if (initializeGit && tryGitInit(dest)) {
+    log('Initialized Git repository');
   }
 }
 
@@ -95,6 +111,7 @@ function createPackageJson(
       'react-dom': versionPkg.dependencies['react-dom'],
     },
     devDependencies: {
+      '@types/node': versionPkg.dependencies['@types/node'],
       '@types/react': versionPkg.dependencies['@types/react'],
       '@types/react-dom': versionPkg.dependencies['@types/react-dom'],
       typescript: versionPkg.dependencies.typescript,
@@ -115,6 +132,10 @@ function createPackageJson(
   }
 
   if (template === 'fuma-docs-mdx') {
+    Object.assign(packageJson.scripts, {
+      postinstall: 'fumadocs-mdx',
+    });
+
     Object.assign(packageJson.dependencies, {
       'fumadocs-mdx': localVersions['fumadocs-mdx'],
     });

@@ -1,4 +1,4 @@
-import { FileText, Hash, Text } from 'lucide-react';
+import { FileText, Hash, Loader2, SearchIcon, Text } from 'lucide-react';
 import type { SortedResult } from 'fumadocs-core/search/shared';
 import { useRouter } from 'next/navigation';
 import {
@@ -8,6 +8,7 @@ import {
   type HTMLAttributes,
 } from 'react';
 import { cva } from 'class-variance-authority';
+import * as React from 'react';
 import { useI18n } from '@/contexts/i18n';
 import {
   CommandEmpty,
@@ -44,6 +45,7 @@ interface SearchDialogProps
 interface SearchContentProps {
   search: string;
   onSearchChange: (v: string) => void;
+  isLoading?: boolean;
   items: SortedResult[];
 
   hideResults?: boolean;
@@ -68,12 +70,15 @@ export function SearchDialog({
   );
 
   return (
-    <CommandDialog open={open} onOpenChange={onOpenChange} footer={footer}>
+    <CommandDialog open={open} onOpenChange={onOpenChange}>
       <Search
         {...props}
         items={props.results === 'empty' ? defaultItems : props.results}
         hideResults={props.results === 'empty' && defaultItems.length === 0}
       />
+      {footer ? (
+        <div className="mt-auto flex flex-col border-t p-3">{footer}</div>
+      ) : null}
     </CommandDialog>
   );
 }
@@ -88,6 +93,7 @@ function Search({
   search,
   onSearchChange,
   items,
+  isLoading,
   hideResults = false,
 }: SearchContentProps): React.ReactElement {
   const { text } = useI18n();
@@ -113,7 +119,22 @@ function Search({
           setOpenSearch(false);
         }, [setOpenSearch])}
         placeholder={text.search}
-      />
+      >
+        <div className="relative size-4">
+          <Loader2
+            className={cn(
+              'absolute size-full animate-spin text-fd-primary transition-opacity',
+              !isLoading && 'opacity-0',
+            )}
+          />
+          <SearchIcon
+            className={cn(
+              'absolute size-full text-fd-muted-foreground transition-opacity',
+              isLoading && 'opacity-0',
+            )}
+          />
+        </div>
+      </CommandInput>
       <CommandList className={cn(hideResults && 'hidden')}>
         <CommandEmpty>{text.searchNoResult}</CommandEmpty>
 
@@ -138,11 +159,11 @@ function Search({
 }
 
 const itemVariants = cva(
-  'rounded-md border px-2 py-0.5 text-xs font-medium text-muted-foreground transition-colors',
+  'rounded-md border px-2 py-0.5 text-xs font-medium text-fd-muted-foreground transition-colors',
   {
     variants: {
       active: {
-        true: 'bg-accent text-accent-foreground',
+        true: 'bg-fd-accent text-fd-accent-foreground',
       },
     },
   },

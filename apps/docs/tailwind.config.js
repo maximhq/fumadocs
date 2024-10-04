@@ -7,13 +7,14 @@ export default {
   content: [
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
-    './content/**/*.mdx',
+    './content/**/*.{mdx,tsx}',
     './mdx-components.tsx',
     './node_modules/fumadocs-ui/dist/**/*.js',
     './node_modules/fumadocs-openapi/dist/**/*.js',
   ],
   presets: [
     createPreset({
+      addGlobalColors: true,
       preset: {
         ...presets.default,
         dark: {

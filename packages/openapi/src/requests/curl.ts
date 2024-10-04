@@ -1,26 +1,46 @@
-import { type Endpoint } from '@/endpoint';
-import { generateInput } from '@/utils/generate-input';
+import { type EndpointSample } from '@/schema/sample';
 import { toSampleInput } from '@/utils/schema';
 
-export function getSampleRequest(endpoint: Endpoint): string {
+export function getSampleRequest(endpoint: EndpointSample): string {
   const s: string[] = [];
 
   s.push(`curl -X ${endpoint.method} "${endpoint.url}"`);
 
   for (const param of endpoint.parameters) {
     if (param.in === 'header') {
-      const value = generateInput(endpoint.method, param.schema);
-      const header = `${param.name}: ${toSampleInput(value)}`;
+      const header = `${param.name}: ${toSampleInput(param.sample)}`;
 
       s.push(`-H "${header}"`);
     }
 
-    if (param.in === 'formData') {
-      console.log('Request example for form data is not supported');
+    if (param.in === 'cookie') {
+      const cookie = JSON.stringify(
+        `${param.name}=${toSampleInput(param.sample)}`,
+      );
+
+      s.push(`--cookie ${cookie}`);
     }
   }
 
-  if (endpoint.body) s.push(`-d '${toSampleInput(endpoint.body)}'`);
+  if (endpoint.body?.mediaType === 'multipart/form-data') {
+    const sample = endpoint.body.sample;
 
-  return s.join(' \\\n  ');
+    if (sample && typeof sample === 'object') {
+      for (const [key, value] of Object.entries(sample)) {
+        s.push(`-F ${key}=${JSON.stringify(value, null, 2)}`);
+      }
+    }
+  } else if (endpoint.body) {
+    s.push(`-H "Content-Type: application/json"`);
+    s.push(`-d '${toSampleInput(endpoint.body.sample)}'`);
+  }
+
+  return s
+    .flatMap((v, i) =>
+      v
+        .split('\n')
+        .map((line) => (i > 0 ? `  ${line}` : line))
+        .join('\n'),
+    )
+    .join(' \\\n');
 }

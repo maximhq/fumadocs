@@ -8,21 +8,35 @@ import {
   type HTMLAttributes,
 } from 'react';
 import { TerminalIcon } from 'lucide-react';
+import Image from 'next/image';
 import { cn } from '@/utils/cn';
 
 export function Previews(): React.ReactElement {
   return (
-    <div className="rounded-xl border bg-background p-4 shadow-lg">
-      <p className="text-sm font-medium">I&apos;m satisfied with it</p>
-
-      <a
-        href="https://joulev.dev"
-        rel="noreferrer noopener"
-        className="mt-4 inline-flex items-center text-sm font-medium"
-      >
-        @joulev
-      </a>
-      <p className="text-xs text-muted-foreground">Next.js Expert</p>
+    <div className="rounded-xl border bg-fd-background p-4 shadow-lg">
+      <p className="text-sm font-medium">
+        A gorgeous documentation framework that composes beautifully into the
+        App Router.
+      </p>
+      <div className="mt-4 flex flex-row items-center gap-2 ">
+        <Image
+          src="https://avatars.githubusercontent.com/u/35677084"
+          alt="avatar"
+          width="32"
+          height="32"
+          className="size-8 rounded-full"
+        />
+        <div>
+          <a
+            href="https://shew.dev"
+            rel="noreferrer noopener"
+            className="text-sm font-medium"
+          >
+            Anthony Shew
+          </a>
+          <p className="text-xs text-fd-muted-foreground">Turbo DX at Vercel</p>
+        </div>
+      </div>
     </div>
   );
 }
@@ -108,7 +122,7 @@ export function CreateAppAnimation(): React.ReactElement {
           <div className="grow" />
           <div className="size-2 rounded-full bg-red-400" />
         </div>
-        <div className="min-h-[200px] bg-gradient-to-b from-secondary [mask-image:linear-gradient(to_bottom,white,transparent)]">
+        <div className="min-h-[200px] bg-gradient-to-b from-fd-secondary [mask-image:linear-gradient(to_bottom,white,transparent)]">
           <code className="grid p-4">{lines}</code>
         </div>
       </pre>
@@ -123,11 +137,11 @@ function LaunchAppWindow(
     <div
       {...props}
       className={cn(
-        'overflow-hidden rounded-md border bg-background shadow-xl',
+        'overflow-hidden rounded-md border bg-fd-background shadow-xl',
         props.className,
       )}
     >
-      <div className="relative flex h-6 flex-row items-center border-b bg-muted px-4 text-xs text-muted-foreground">
+      <div className="relative flex h-6 flex-row items-center border-b bg-fd-muted px-4 text-xs text-fd-muted-foreground">
         <p className="absolute inset-x-0 text-center">localhost:3000</p>
       </div>
       <div className="p-4 text-sm">New App launched!</div>

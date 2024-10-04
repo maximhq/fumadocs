@@ -6,12 +6,13 @@ export default defineConfig({
   target: 'es2022',
   format: 'esm',
   entry: [
-    'src/{toc,toc-internal,link,breadcrumb,sidebar,dynamic-link}.tsx',
+    'src/{toc,link,breadcrumb,sidebar,dynamic-link}.tsx',
     'src/{server,source,mdx-plugins}/index.ts',
     'src/{search,search-algolia}/client.ts',
     'src/search/shared.ts',
     'src/utils/use-on-change.ts',
     'src/{search,search-algolia}/server.ts',
     'src/middleware.ts',
+    'src/i18n/index.ts',
   ],
 });
