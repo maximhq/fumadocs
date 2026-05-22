@@ -1,0 +1,111 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: npm
+    directory: /apps/docs
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: npm
+    directory: /examples/content-collections
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: npm
+    directory: /examples/i18n
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: npm
+    directory: /examples/next-mdx
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: npm
+    directory: /examples/openapi
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: npm
+    directory: /examples/remote-mdx
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: npm
+    directory: /packages/cli
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: npm
+    directory: /packages/content-collections
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: npm
+    directory: /packages/core
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: npm
+    directory: /packages/create-app-versions
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: npm
+    directory: /packages/create-app
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: npm
+    directory: /packages/doc-gen
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: npm
+    directory: /packages/eslint-config-custom
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: npm
+    directory: /packages/mdx-remote
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: npm
+    directory: /packages/mdx
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: npm
+    directory: /packages/openapi
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: npm
+    directory: /packages/tsconfig
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: npm
+    directory: /packages/twoslash
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: npm
+    directory: /packages/typescript
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: npm
+    directory: /packages/ui
+    schedule:
+      interval: weekly
